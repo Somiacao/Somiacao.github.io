@@ -88,7 +88,7 @@
 <meta property="og:image" content="https://somiacao.github.io/images/spark1/theme.png">
 <meta property="og:image" content="https://somiacao.github.io/images/spark1/narrow_dependency.png">
 <meta property="og:image" content="https://somiacao.github.io/images/spark1/wide_dependency.png">
-<meta property="og:updated_time" content="2019-03-01T08:40:46.487Z">
+<meta property="og:updated_time" content="2019-03-01T09:48:47.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark1">
 <meta name="twitter:image" content="https://somiacao.github.io/images/spark1/theme.png">
@@ -360,27 +360,27 @@
 <h1 id="Apache-Spark"><a href="#Apache-Spark" class="headerlink" title="Apache Spark"></a>Apache Spark</h1><p>Spark是一个统一的分布式内存计算引擎，包括一组用于在计算机集群上进行并行数据处理的函数。</p>
 <p>可运行在笔记本电脑上，也可运行于数千台服务器的集群上</p>
 <p>spark是由许多不同的组件组成的</p>
-<h2 id="spark的关键部分"><a href="#spark的关键部分" class="headerlink" title="spark的关键部分"></a>spark的关键部分</h2><h3 id="统一"><a href="#统一" class="headerlink" title="统一"></a>统一</h3><p>spark的关键驱动目标是为<strong>编写大数据应用程序</strong>提供一个统一的平台。spark的设计目的是支持广泛的数据分析任务，<br>从<strong>简单的加载</strong>和<strong>SQL查询</strong>到<strong>机器学习</strong>和<strong>流计算</strong>，这些都通过相同的计算引擎和一致的api集合实现。</p>
-<p>spark提供了一致的、可组合的api,使用这些api从较小的部分或现有的库中构建应用程序。spark的API也被设计为通过<br>优化在用户程序中组合的不同库和函数来实现高性能。</p>
-<h3 id="计算引擎"><a href="#计算引擎" class="headerlink" title="计算引擎"></a>计算引擎</h3><p>spark处理从存储系统加载数据并在其上执行，但最终数据并不永久存储在spark中。spark可和多种存储系统结合使用，如<br>kafka、HBase、Hive、HDFS以及关系型数据库。</p>
-<p>Hadoop和spark的区别：<br>Hadoop包括一个存储系统（Hadoop文件系统HDFS，用低成本的商品服务器集群做存储）和一个紧密集成的计算引擎<br>（MapReduce）。存储系统和计算引擎无法割裂。</p>
+<h2 id="spark的关键部分"><a href="#spark的关键部分" class="headerlink" title="spark的关键部分"></a>spark的关键部分</h2><h3 id="统一"><a href="#统一" class="headerlink" title="统一"></a>统一</h3><p>spark的关键驱动目标是为<strong>编写大数据应用程序</strong>提供一个统一的平台。spark的设计目的是支持广泛的数据分析任务，从<strong>简单的加载</strong>和<strong>SQL查询</strong>到<strong>机器学习</strong>和<strong>流计算</strong>，这些都通过相同的计算引擎和一致的api集合实现。</p>
+<p>spark提供了一致的、可组合的api,使用这些api从较小的部分或现有的库中构建应用程序。spark的API也被设计为通过优化在用户程序中组合的不同库和函数来实现高性能。</p>
+<h3 id="计算引擎"><a href="#计算引擎" class="headerlink" title="计算引擎"></a>计算引擎</h3><p>spark处理从存储系统加载数据并在其上执行，但最终数据并不永久存储在spark中。spark可和多种存储系统结合使用，如kafka、HBase、Hive、HDFS以及关系型数据库。</p>
+<p>Hadoop和spark的区别：<br>Hadoop包括一个存储系统（Hadoop文件系统HDFS，用低成本的商品服务器集群做存储）和一个紧密集成的计算引擎（MapReduce）。存储系统和计算引擎无法割裂。</p>
 <h3 id="函数库"><a href="#函数库" class="headerlink" title="函数库"></a>函数库</h3><p>spark最终的组件是它的库，它以统一引擎的设计为基础，为公共数据分析任务提供统一的API。</p>
-<p>spark主要的库：SQL和结构化数据的库（spark SQL）、机器学习（MLlib）、流处理（Spark流和新的结构化流处理<br>structured Streaming）和图形分析（GraphX）。</p>
-<h2 id="spark产生的背景"><a href="#spark产生的背景" class="headerlink" title="spark产生的背景"></a>spark产生的背景</h2><p>由于散热方面的限制，硬件开发人员停止让单个处理器运行的更快，转而使用相同的速度增加更多的并行CPU内核。需要<br>修改程序以增加并行性，以便更快的运行，这为新的编程模式（spark）创造了舞台。</p>
+<p>spark主要的库：SQL和结构化数据的库（spark SQL）、机器学习（MLlib）、流处理（Spark流和新的结构化流处理structured Streaming）和图形分析（GraphX）。</p>
+<h2 id="spark产生的背景"><a href="#spark产生的背景" class="headerlink" title="spark产生的背景"></a>spark产生的背景</h2><p>由于散热方面的限制，硬件开发人员停止让单个处理器运行的更快，转而使用相同的速度增加更多的并行CPU内核。需要修改程序以增加并行性，以便更快的运行，这为新的编程模式（spark）创造了舞台。</p>
 <p>搜集了大量数据，处理这些数据需要并行度高的计算引擎，需要运行在集群之上。</p>
 <p>过去的50年中开发的软件不能自动伸缩，传统的处理数据程序的编程模式不能满足新的编程需求。</p>
-<h2 id="spark的基本框架"><a href="#spark的基本框架" class="headerlink" title="spark的基本框架"></a>spark的基本框架</h2><p>一组机器本身并不强大，需要一个框架来协调它们之间的工作。spark就是这样做的，管理和协调跨集群计算机上的数据执行<br>任务。spark将用于执行任务的集群交由集群管理器管理，如Spark Standalone集群管理器、YARN集群管理器、Mesos<br>集群管理器。</p>
+<h2 id="spark的基本框架"><a href="#spark的基本框架" class="headerlink" title="spark的基本框架"></a>spark的基本框架</h2><p>一组机器本身并不强大，需要一个框架来协调它们之间的工作。spark就是这样做的，管理和协调跨集群计算机上的数据执行任务。spark将用于执行任务的集群交由集群管理器管理，如Spark Standalone集群管理器、YARN集群管理器、Mesos集群管理器。</p>
 <h3 id="spark应用程序"><a href="#spark应用程序" class="headerlink" title="spark应用程序"></a>spark应用程序</h3><p>spark应用程序由一个driver进程（驱动程序）和一组Executor进程组成。</p>
-<p>driver进行负责运行main函数，此进程位于集群中的一个节点上。负责三件事：维护有关spark应用程序的信息；响应<br>用户的应用程序或输入；分析、分配和调度executor。</p>
+<p>driver进行负责运行main函数，此进程位于集群中的一个节点上。负责三件事：维护有关spark应用程序的信息；响应用户的应用程序或输入；分析、分配和调度executor。</p>
 <p>executor进行只负责两件事：执行由驱动程序分配给它的代码；并将执行器executor的计算状态报告给驱动节点。</p>
 <p><strong>要点：</strong></p>
 <p>spark使用一个集群管理器来跟踪可用的资源</p>
 <p>driver驱动程序负责执行驱动程序的命令，在executor执行器中完成给定的任务。</p>
 <h2 id="DataFrames"><a href="#DataFrames" class="headerlink" title="DataFrames"></a>DataFrames</h2><p>spark有几个核心抽象：Datasets、DataFrames、SQL表和弹性分布式数据集（RDDS）</p>
-<h3 id="Partitions"><a href="#Partitions" class="headerlink" title="Partitions"></a>Partitions</h3><p>为了使每个executor执行器并行执行任务，Spark将数据分成块，这些数据块成为partition(分区)。<br>一个分区是集群中的一个物理机器上的行集合。</p>
-<h2 id="Transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h2><p>在spark中核心数据结构是不可变的，这意味着它们在创建之后无法更改。要“更改”一个DataFrame，需要指导spark<br>如何修改它以实现想要的功能。这些指导指令称为Transformations转换。</p>
+<h3 id="Partitions"><a href="#Partitions" class="headerlink" title="Partitions"></a>Partitions</h3><p>为了使每个executor执行器并行执行任务，Spark将数据分成块，这些数据块成为partition(分区)。一个分区是集群中的一个物理机器上的行集合。</p>
+<h2 id="Transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h2><p>在spark中核心数据结构是不可变的，这意味着它们在创建之后无法更改。要“更改”一个DataFrame，需要指导spark如何修改它以实现想要的功能。这些指导指令称为Transformations转换。</p>
 <p>Transformations转换是使用Spark表达业务逻辑的核心方法。<br>有两种类型的转换：窄依赖的转换、宽依赖的转换</p>
-<p>窄依赖的转换是每个输入数据分区只对一个数据输出分区，一个输入分区最多一个输出分区。窄依赖转换，spark将自动<br>执行流水线pipeline的操作。</p>
+<p>窄依赖的转换是每个输入数据分区只对一个数据输出分区，一个输入分区最多一个输出分区。窄依赖转换，spark将自动执行流水线pipeline的操作。</p>
 <p><img src="https://somiacao.github.io/images/spark1/narrow_dependency.png" alt="png"></p>
 <p>宽依赖的转换，一个输入数据分区对应多个输出分区。</p>
 <p><img src="https://somiacao.github.io/images/spark1/wide_dependency.png" alt="png"></p>
@@ -390,7 +390,7 @@
 <p>在控制台中查看数据的action</p>
 <p>数据收集的action操作</p>
 <p>输出到第三方存储系统的action操作</p>
-<p>在指定这个 count 操作时，我们启动了一个 Spark job，运行我们的过滤器 filter 转换(一<br>个窄依赖转换)，然后是一个聚合(一个宽依赖转换)，它在每个分区基础上执行计数，然后<br>是一个收集 action，它将我们的结果返回到driver端。</p>
+<p>在指定这个 count 操作时，我们启动了一个 Spark job，运行我们的过滤器 filter 转换(一个窄依赖转换)，然后是一个聚合(一个宽依赖转换)，它在每个分区基础上执行计数，然后是一个收集 action，它将我们的结果返回到driver端。</p>
 <h2 id="spark-UI"><a href="#spark-UI" class="headerlink" title="spark UI"></a>spark UI</h2><p>通过spark web UI监视作业的进度。Spark UI在driver节点的4040端口上可用。如果在本地模式下，则将是HTTP://localhost:4040。Spark UI显示关于spark作业状态、环境和集群状态的信息。对于调优和调试非常有用。</p>
 
       
