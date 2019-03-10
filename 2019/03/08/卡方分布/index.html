@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="卡方分布,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="卡方分布">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卡方分布">
+<meta property="og:url" content="http://yoursite.com/2019/03/08/卡方分布/index.html">
+<meta property="og:site_name" content="最可爱的人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://somiacao.github.io/images/chi2_distribution/theme.png">
+<meta property="og:image" content="https://somiacao.github.io/images/chi2_distribution/output_1_1.png">
+<meta property="og:image" content="https://somiacao.github.io/images/chi2_distribution/output_2_1.png">
+<meta property="og:image" content="https://somiacao.github.io/images/chi2_distribution/output_5_1.png">
+<meta property="og:updated_time" content="2019-03-10T02:36:40.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卡方分布">
+<meta name="twitter:image" content="https://somiacao.github.io/images/chi2_distribution/theme.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/08/卡方分布/">
+
+
+
+
+
+  <title>卡方分布 | 最可爱的人</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband">
+       <a href="https://github.com/Somiacao"><img style="position: fixed; top: 0; right: 0; border: 0;" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_orange_ff7600.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    </div>
+    
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最可爱的人</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/卡方分布/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Max Cao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最可爱的人">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">卡方分布</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">Python数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://somiacao.github.io/images/chi2_distribution/theme.png" alt="png"><br><a id="more"></a></p>
+<h1 id="卡方分布（Chi-Squared-Distribution）"><a href="#卡方分布（Chi-Squared-Distribution）" class="headerlink" title="卡方分布（Chi-Squared Distribution）"></a>卡方分布（Chi-Squared Distribution）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>通俗的说就是通过小数量的样本容量去预估总体容量的分布情况</p>
+<p>卡方检验就是统计样本的实际观测值与理论推断之间的偏离程度</p>
+<p>若$n$个相互独立的随机变量$\xi_1,\xi_2,\cdots,\xi_n$均服从标准正态分布(也称独立同分布于标准正态分布)，则这$n$个服从正态分布的随机变量的平方和构成一新的随机变量，其分布规律称为卡方分布（Chi-square distribution）</p>
+<p>自由度：假设你现在手头有3个变量，因为变量有随机性，所以他们取值不定。假设处于某种原因，我们需要让变量均值固定，比如说，均值取0，这个时候，真正取值自由，“有随机性”的样本只有2个。”有随机性”的样本只有2个。</p>
+<p>卡方检验的基本思想就是根据样本数据推断总体的频次与期望频次是否有显著性差异</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><script type="math/tex; mode=display">f(x|k) = \left\{\begin{matrix}
+\frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma (\frac{k}{2})},if x>0
+\\
+0,otherwise
+\end{matrix}\right.</script><script type="math/tex; mode=display">where \Gamma=(n-1)!</script><p>and $k$ denotes the degrees of freedom</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> stats</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.style <span class="keyword">as</span> style</span><br><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> HTML</span><br><span class="line"></span><br><span class="line"><span class="comment"># PLOTTING CONFIG</span></span><br><span class="line">%matplotlib inline</span><br><span class="line">style.use(<span class="string">"fivethirtyeight"</span>)</span><br><span class="line">plt.rcParams[<span class="string">"figure.figsize"</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(dpi=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#PDF</span></span><br><span class="line">plt.plot(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">4</span>))</span><br><span class="line">plt.fill_between(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">4</span>),</span><br><span class="line">                alpha=<span class="number">.15</span>)</span><br><span class="line"><span class="comment"># cdf</span></span><br><span class="line">plt.plot(np.linspace(<span class="number">0</span>,<span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.cdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df=<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#legend</span></span><br><span class="line">plt.xticks(np.arange(<span class="number">0</span>,<span class="number">21</span>,<span class="number">2</span>))</span><br><span class="line">plt.text(x=<span class="number">11</span>,y=<span class="number">.25</span>,s=<span class="string">"pdf(normed)"</span>,alpha=<span class="number">.75</span>, weight=<span class="string">"bold"</span>, color=<span class="string">"#008fd5"</span>)</span><br><span class="line">plt.text(x=<span class="number">11</span>, y=<span class="number">.85</span>,s=<span class="string">"cdf"</span>,alpha=<span class="number">.75</span>,weight=<span class="string">"bold"</span>,color=<span class="string">"#fc4f30"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#ticks</span></span><br><span class="line">plt.tick_params(axis = <span class="string">"both"</span>,which=<span class="string">"major"</span>, labelsize=<span class="number">18</span>)</span><br><span class="line">plt.axhline(y=<span class="number">0</span>,color=<span class="string">"black"</span>, linewidth=<span class="number">1.3</span>, alpha=<span class="number">.7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#title</span></span><br><span class="line">plt.text(x=<span class="number">-2</span>, y=<span class="number">1.5</span>, s = <span class="string">r"Chi-Square $(\chi^&#123;2&#125;)$Distribution -Overview"</span>,</span><br><span class="line">        fontsize = <span class="number">26</span>, weight=<span class="string">"bold"</span>, alpha=<span class="number">.75</span>)</span><br><span class="line">plt.text(x=<span class="number">-2</span>, y=<span class="number">1.1</span>, s = <span class="string">"Depicted below are the normed probability density function(pdf) and the cumulative density\n function(cdf) of a Chi-Squared distributed random variables $y\sim \chi^&#123;2&#125;$,given $k$=4"</span>,</span><br><span class="line">        fontsize = <span class="number">19</span>, weight=<span class="string">"bold"</span>, alpha=<span class="number">.85</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(-2, 1.1, &#39;Depicted below are the normed probability density function(pdf) and the cumulative density\n function(cdf) of a Chi-Squared distributed random variables $y\\sim \\chi^{2}$,given $k$=4&#39;)
+</code></pre><p><img src="https://somiacao.github.io/images/chi2_distribution/output_1_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(dpi=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#PDF 自由度k=1</span></span><br><span class="line">plt.plot(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">1</span>))</span><br><span class="line">plt.fill_between(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">1</span>),</span><br><span class="line">                alpha=<span class="number">.15</span>)</span><br><span class="line"><span class="comment">#PDF 自由度k=3</span></span><br><span class="line">plt.plot(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">3</span>))</span><br><span class="line">plt.fill_between(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">3</span>),</span><br><span class="line">                alpha=<span class="number">.15</span>)</span><br><span class="line"><span class="comment">#PDF 自由度k=5</span></span><br><span class="line">plt.plot(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">6</span>))</span><br><span class="line">plt.fill_between(np.linspace(<span class="number">0</span>, <span class="number">20</span>, <span class="number">100</span>),</span><br><span class="line">        stats.chi2.pdf(np.linspace(<span class="number">0</span>,<span class="number">20</span>,<span class="number">100</span>),df =<span class="number">6</span>),</span><br><span class="line">                alpha=<span class="number">.15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#legend</span></span><br><span class="line">plt.text(x=<span class="number">5</span>,y=<span class="number">.7</span>,s=<span class="string">"k=1"</span>,rotation=<span class="number">-65</span>, alpha=<span class="number">.75</span>, weight=<span class="string">"bold"</span>, color=<span class="string">"#008fd5"</span>)</span><br><span class="line">plt.text(x=<span class="number">1.5</span>,y=<span class="number">.35</span>,s=<span class="string">"k=3"</span>, alpha=<span class="number">.75</span>, weight=<span class="string">"bold"</span>, color=<span class="string">"#fc4f30"</span>)</span><br><span class="line">plt.text(x=<span class="number">5</span>,y=<span class="number">.2</span>,s=<span class="string">"k=6"</span>, alpha=<span class="number">.75</span>, weight=<span class="string">"bold"</span>, color=<span class="string">"#e5ae38"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#ticks</span></span><br><span class="line">plt.tick_params(axis=<span class="string">"both"</span>, which=<span class="string">"major"</span>, labelsize=<span class="number">18</span>)</span><br><span class="line">plt.axhline(y=<span class="number">0</span>, color=<span class="string">"black"</span>, linewidth=<span class="number">1.3</span>, alpha=<span class="number">.7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#title</span></span><br><span class="line">plt.text(x=<span class="number">-1.5</span>, y= <span class="number">1.2</span>, s=<span class="string">"Chi-Squared Distribution-$k$"</span>,</span><br><span class="line">        fontsize=<span class="number">26</span>, weight=<span class="string">"bold"</span>, alpha=<span class="number">.75</span>)</span><br><span class="line">plt.text(x=<span class="number">-1.5</span>, y=<span class="number">0.9</span>,</span><br><span class="line">        s=<span class="string">"Depicted below are three Chi-Squared distribution random variables with varying $k$.As one can \n see the parameter $k$ smoothens the distribution and soften the skewness"</span>,</span><br><span class="line">        fontsize=<span class="number">19</span>, alpha=<span class="number">.85</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Text(-1.5, 0.9, &#39;Depicted below are three Chi-Squared distribution random variables with varying $k$.As one can \n see the parameter $k$ smoothens the distribution and soften the skewness&#39;)
+</code></pre><p><img src="https://somiacao.github.io/images/chi2_distribution/output_2_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2</span><br><span class="line"><span class="comment">#draw a single sample</span></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line">print(chi2.rvs(df=<span class="number">4</span>),end=<span class="string">"\n\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#draw 10 samples</span></span><br><span class="line">print(chi2.rvs(df=<span class="number">4</span>,size=<span class="number">10</span>),end=<span class="string">"\n\n"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>4.787358779738473
+
+[2.98892946 2.76456717 2.76460459 9.29942882 5.73341246 2.262156
+ 4.93962895 3.99792053 0.43182989 1.34248457]
+</code></pre><h2 id="probability-Density-Function"><a href="#probability-Density-Function" class="headerlink" title="probability Density Function"></a>probability Density Function</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2</span><br><span class="line"></span><br><span class="line"><span class="comment">#additional import for plotting purpose</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">"figure.figsize"</span>]=(<span class="number">14</span>, <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># continuous pdf for the plot</span></span><br><span class="line">x_s = np.arange(<span class="number">15</span>)</span><br><span class="line">y_s = chi2.pdf(x=x_s, df=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">plt.scatter(x_s, y_s, s=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;matplotlib.collections.PathCollection at 0x2072b651eb8&gt;
+</code></pre><p><img src="https://somiacao.github.io/images/chi2_distribution/output_5_1.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2</span><br><span class="line"></span><br><span class="line"><span class="comment"># probability of x less or equal 0.3</span></span><br><span class="line">print(<span class="string">"P(X&lt;=3) = &#123;&#125;"</span>.format(chi2.cdf(x=<span class="number">3</span>,df=<span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># probability of x in [2,8]</span></span><br><span class="line">print(<span class="string">"P(2&lt;X&lt;8) = &#123;&#125;"</span>.format(chi2.cdf(x=<span class="number">8</span>,df=<span class="number">4</span>)-chi2.cdf(x=<span class="number">2</span>,df=<span class="number">4</span>)))</span><br></pre></td></tr></table></figure>
+<pre><code>P(X&lt;=3) = 0.4421745996289252
+P(2&lt;X&lt;8) = 0.6441806878992138
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/卡方分布/" rel="tag"># 卡方分布</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/均匀分布/" rel="next" title="均匀分布">
+                <i class="fa fa-chevron-left"></i> 均匀分布
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/10/spark（二）/" rel="prev" title="spark2">
+                spark2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Max Cao</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#卡方分布（Chi-Squared-Distribution）"><span class="nav-number">1.</span> <span class="nav-text">卡方分布（Chi-Squared Distribution）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">1.2.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#probability-Density-Function"><span class="nav-number">1.3.</span> <span class="nav-text">probability Density Function</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max Cao</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>人
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
