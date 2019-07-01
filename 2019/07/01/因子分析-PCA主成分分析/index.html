@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="因子分析,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="因子分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="因子分析-PCA主成分分析">
+<meta property="og:url" content="http://yoursite.com/2019/07/01/因子分析-PCA主成分分析/index.html">
+<meta property="og:site_name" content="最可爱的人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://somiacao.github.io/images/principal_component_analysis/theme.png">
+<meta property="og:image" content="https://somiacao.github.io/images/principal_component_analysis/output_8_0.png">
+<meta property="og:image" content="https://somiacao.github.io/images/principal_component_analysis/output_17_0.png">
+<meta property="og:image" content="https://somiacao.github.io/images/principal_component_analysis/output_20_0.png">
+<meta property="og:image" content="https://somiacao.github.io/images/principal_component_analysis/output_21_0.png">
+<meta property="og:updated_time" content="2019-07-01T02:49:14.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="因子分析-PCA主成分分析">
+<meta name="twitter:image" content="https://somiacao.github.io/images/principal_component_analysis/theme.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/01/因子分析-PCA主成分分析/">
+
+
+
+
+
+  <title>因子分析-PCA主成分分析 | 最可爱的人</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband">
+       <a href="https://github.com/Somiacao"><img style="position: fixed; top: 0; right: 0; border: 0;" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_orange_ff7600.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    </div>
+    
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最可爱的人</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/因子分析-PCA主成分分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Max Cao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最可爱的人">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">因子分析-PCA主成分分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T00:00:00+08:00">
+                2019-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">Python数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://somiacao.github.io/images/principal_component_analysis/theme.png" alt="png"><br><a id="more"></a></p>
+<h1 id="因子分析"><a href="#因子分析" class="headerlink" title="因子分析"></a>因子分析</h1><p>因子分析是将具有错综复杂关系的变量（或样本）综合为少数几个因子，以再现原始变量和因子之间的相互关系，探讨多个能够直接测量，并具有一定相关性的实测指标是如何受少数几个内在的独立因子所支配，并且在条件许可时借此尝试对变量进行分类</p>
+<h2 id="因子分析的基本思想"><a href="#因子分析的基本思想" class="headerlink" title="因子分析的基本思想"></a>因子分析的基本思想</h2><p>根据变量间相关性的大小把变量分组，使得组内的变量之间的相关性（共性）较高，并且一个公共因子来代表这个组的变量，而不同组的变量相关性较低（个性）。</p>
+<h2 id="因子分析的目的"><a href="#因子分析的目的" class="headerlink" title="因子分析的目的"></a>因子分析的目的</h2><p>因子分析的目的，通俗来讲就是简化变量维数。即要使因素结构简单化，希望以最少的共同因子，能对总变异量作最大的解释，因而抽取得因子越少越好，但抽取得因子的累计解释的变异量越大越好。</p>
+<h3 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h3><p>（1）主成分分析<br>（2）线性判别分析</p>
+<h2 id="主成分分析（PCA）"><a href="#主成分分析（PCA）" class="headerlink" title="主成分分析（PCA）"></a>主成分分析（PCA）</h2><h3 id="principal-component-analysis"><a href="#principal-component-analysis" class="headerlink" title="principal component analysis"></a>principal component analysis</h3><p>用途：降维中最常用的一种手段</p>
+<p>目标：提取最有价值的信息（基于方差）</p>
+<h3 id="向量的表示及基变换"><a href="#向量的表示及基变换" class="headerlink" title="向量的表示及基变换"></a>向量的表示及基变换</h3><p>内积：$\left(a_{1}, a_{2}, \cdots, a_{n}\right)^{\top} \cdot\left(b_{1}, b_{2}, \cdots, b_{n}\right)^{\top}=a_{1} b_{1}+a_{2} b_{2}+\cdots+a_{n} b_{n}$</p>
+<p>解释：$A \cdot B=|A||B| \cos (a)$</p>
+<p>设向量 $B$ 的模为1，则 $A$ 和 $B$ 的内积值等于 $A$ 向 $B$ 所在直线投影的矢量长度</p>
+<p>向量可以表示为（3,2）</p>
+<p>实际上表示线性组合：$x(1,0)^{\top}+y(0,1)^{\top}$</p>
+<p>基：（1,0）和（0,1）叫做二维空间中的一组基</p>
+<h3 id="基变换"><a href="#基变换" class="headerlink" title="基变换"></a>基变换</h3><p>基是正交的（即内积为0）</p>
+<p>要求：线性无关</p>
+<p>变换：数据与一个基做内积运算，结果作为第一个新的坐标分量，然后与第二个基做内积运算，结果作为第二个新坐标分量</p>
+<p>数据（3,2）映射到基中坐标：$\left(\begin{array}{cc}{1 / \sqrt{2}} &amp; {1 / \sqrt{2}} \\ {-1 / \sqrt{2}} &amp; {1 / \sqrt{2}}\end{array}\right)\left(\begin{array}{l}{3} \\ {2}\end{array}\right)=\left(\begin{array}{c}{5 / \sqrt{2}} \\ {-1 / \sqrt{2}}\end{array}\right)$</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}{p_{1}} \\ {p_{2}} \\ {\vdots} \\ {p_{R}}\end{array}\right)\left(\begin{array}{llll}{a_{1}} & {a_{2}} & {\cdots} & {a_{M}}\end{array}\right)=\left(\begin{array}{cccc}{p_{1} a_{1}} & {p_{1} a_{2}} & {\cdots} & {p_{1} a_{M}} \\ {p_{2} a_{1}} & {p_{2} a_{2}} & {\cdots} & {p_{2} a_{M}} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} \\ {p_{R} a_{1}} & {p_{R} a_{2}} & {\cdots} & {p_{R} a_{M}}\end{array}\right)</script><p>两个矩阵相乘的意义是将右边矩阵中的每一列列向量变换到左边矩阵中每一行行向量为基所表示的空间中去。</p>
+<h3 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h3><p>方向：如何选择这个方向（或者说基）才能尽量保留最多的原始信息？一种直观的看法：希望投影后的投影值尽可能分散</p>
+<p>方差：$\operatorname{Var}(a)=\frac{1}{m} \sum_{i=1}^{m}\left(a_{i}-\mu\right)^{2}$</p>
+<p>寻找一个基，使得所有数据变换为这个基上的坐标表示后，方差值最大</p>
+<p>协方差（假设均值为0时）：$\operatorname{Cov}(a, b)=\frac{1}{m} \sum_{i=1}^{m} a_{i} b_{i}$</p>
+<h3 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h3><p>如果单纯只选择方差最大的方向，后续方向应该会和方差最大的方向接近重合。</p>
+<p>解决方案：为了让两个字段尽可能表示更多的原始信息，我们是不希望它们之间存在（线性）相关性的</p>
+<p>协方差：可以用两个字段的协方差表示其相关性</p>
+<p>当协方差为0时，表示两个字段完全独立。为了让协方差为0，选择第二个基时，只能在与第一个基正交上选择。因此最终选择的两个方向一定是正交的。</p>
+<h3 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h3><p>将一组N维向量降维为K维（K大于0,小于N）,目标是选择K个单位正交基，使原始数据变换到这组基上后，各字段两两间协方差为0，字段的方差则尽可能大</p>
+<p>协方差矩阵：$X=\left(\begin{array}{llll}{a_{1}} &amp; {a_{2}} &amp; {\cdots} &amp; {a_{m}} \\ {b_{1}} &amp; {b_{2}} &amp; {\cdots} &amp; {b_{m}}\end{array}\right) \quad \frac{1}{m} X X^{\top}=\left(\begin{array}{ccc}{\frac{1}{m} \sum_{i=1}^{m} a_{i}^{2}} &amp; {\frac{1}{m} \sum_{i=1}^{m} a_{i} b_{i}} \\ {\frac{1}{m} \sum_{i=1}^{m} a_{i} b_{i}} &amp; {\frac{1}{m} \sum_{i=1}^{m} b_{i}^{2}}\end{array}\right)$</p>
+<p>矩阵对角线上的两个元素分别是两个字段的方差，而其他元素是a和b的协方差。</p>
+<p>协方差矩阵对角化：即除对角元素外的其它元素化为0，并且在对角线上将元素按从大到小从上到下排列</p>
+<p>协方差矩阵对角化：$P C P^{\top}=\Lambda=\left(\begin{array}{ccccc}{\lambda_{1}} &amp; {} &amp; {} &amp; {} \\ {} &amp; {} &amp; {\lambda_{2}} &amp; {} \\ {} &amp; {} &amp; {} &amp; {\ddots} \\ {} &amp; {} &amp; {} &amp; {} &amp; {\lambda_{n}}\end{array}\right)$</p>
+<p>实对称矩阵:一个n行n列的实对称矩阵一定可以找到n个单位正交的特征向量</p>
+<script type="math/tex; mode=display">
+E=\left(\begin{array}{llll}{e_{1}} & {e_{2}} & {\cdots} & {e_{n}}\end{array}\right)</script><p>实对称阵可以进行对角化：</p>
+<script type="math/tex; mode=display">
+E C E^{\top}=\Lambda=\left(\begin{array}{ccccccc}{\lambda_{1}} & {} & {} & {} \\ {} & {\lambda_{2}} & {} & {} \\ {} & {} & {\ddots} & {} \\ {} & {} & {} & {\lambda_{n}}\end{array}\right)</script><p>根据特征值的从小到大，将特征向量从上到下排列，则用前K行组成的矩阵乘以原始数据矩阵X，就得到了我们需要的降维后的数据矩阵Y</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line">df = pd.read_csv(<span class="string">"D:\\Users\\69469\\AppData\\Local\\Continuum\\anaconda3\\lib\\site-packages\\sklearn\\datasets\\data\\iris.csv"</span>)</span><br><span class="line">print(df.head())</span><br></pre></td></tr></table></figure>
+<pre><code>   150    4  setosa  versicolor  virginica
+0  5.1  3.5     1.4         0.2          0
+1  4.9  3.0     1.4         0.2          0
+2  4.7  3.2     1.3         0.2          0
+3  4.6  3.1     1.5         0.2          0
+4  5.0  3.6     1.4         0.2          0
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.columns = [<span class="string">'sepal_len'</span>,<span class="string">'sepal_wid'</span>,<span class="string">'petal_len'</span>,<span class="string">'petal_wid'</span>,<span class="string">'class'</span>]</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_len</th>
+      <th>sepal_wid</th>
+      <th>petal_len</th>
+      <th>petal_wid</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># split data into data X and class labels Y</span></span><br><span class="line">X = df.iloc[:,<span class="number">0</span>:<span class="number">4</span>].values</span><br><span class="line">y = df.iloc[:,<span class="number">4</span>].values</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">label_dict = &#123;</span><br><span class="line">    <span class="string">'Iris-Setosa'</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="string">'Iris-Versicolor'</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="string">'Iris-Virginica'</span>:<span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line">feature_dict = &#123;</span><br><span class="line">    <span class="number">0</span>:<span class="string">'speal length [cm]'</span>,</span><br><span class="line">    <span class="number">1</span>:<span class="string">'sepeal width [cm]'</span>,</span><br><span class="line">    <span class="number">2</span>:<span class="string">'petal length [cm]'</span>,</span><br><span class="line">    <span class="number">3</span>:<span class="string">'petal width [cm]'</span></span><br><span class="line">&#125;</span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line"><span class="keyword">for</span> cnt <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">    plt.subplot(<span class="number">2</span>,<span class="number">2</span>,cnt+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> lab <span class="keyword">in</span> (<span class="string">'Iris-Setosa'</span>,<span class="string">'Iris-Versicolor'</span>,<span class="string">'Iris-Virginica'</span>):</span><br><span class="line">        plt.hist(X[y==label_dict[lab], cnt],</span><br><span class="line">                label = lab,</span><br><span class="line">                bins = <span class="number">10</span>,</span><br><span class="line">                alpha = <span class="number">0.3</span>)</span><br><span class="line">    plt.xlabel(feature_dict[cnt])</span><br><span class="line">    plt.legend(loc=<span class="string">'upper right'</span>, fancybox = <span class="keyword">True</span>, fontsize=<span class="number">8</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/principal_component_analysis/output_8_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#归一化处理、标准化处理、正态分布处理，根据交叉验证结果进行确定使用哪个处理</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">X_std = StandardScaler().fit_transform(X)</span><br><span class="line">print(X_std)</span><br></pre></td></tr></table></figure>
+<pre><code>[[-9.00681170e-01  1.01900435e+00 -1.34022653e+00 -1.31544430e+00]
+ [-1.14301691e+00 -1.31979479e-01 -1.34022653e+00 -1.31544430e+00]
+ [-1.38535265e+00  3.28414053e-01 -1.39706395e+00 -1.31544430e+00]
+ [-1.50652052e+00  9.82172869e-02 -1.28338910e+00 -1.31544430e+00]
+ [-1.02184904e+00  1.24920112e+00 -1.34022653e+00 -1.31544430e+00]
+ [-5.37177559e-01  1.93979142e+00 -1.16971425e+00 -1.05217993e+00]
+ [-1.50652052e+00  7.88807586e-01 -1.34022653e+00 -1.18381211e+00]
+ [-1.02184904e+00  7.88807586e-01 -1.28338910e+00 -1.31544430e+00]
+ [-1.74885626e+00 -3.62176246e-01 -1.34022653e+00 -1.31544430e+00]
+ [-1.14301691e+00  9.82172869e-02 -1.28338910e+00 -1.44707648e+00]
+ [-5.37177559e-01  1.47939788e+00 -1.28338910e+00 -1.31544430e+00]
+ [-1.26418478e+00  7.88807586e-01 -1.22655167e+00 -1.31544430e+00]
+ [-1.26418478e+00 -1.31979479e-01 -1.34022653e+00 -1.44707648e+00]
+ [-1.87002413e+00 -1.31979479e-01 -1.51073881e+00 -1.44707648e+00]
+ [-5.25060772e-02  2.16998818e+00 -1.45390138e+00 -1.31544430e+00]
+ [-1.73673948e-01  3.09077525e+00 -1.28338910e+00 -1.05217993e+00]
+ [-5.37177559e-01  1.93979142e+00 -1.39706395e+00 -1.05217993e+00]
+ [-9.00681170e-01  1.01900435e+00 -1.34022653e+00 -1.18381211e+00]
+ [-1.73673948e-01  1.70959465e+00 -1.16971425e+00 -1.18381211e+00]
+ [-9.00681170e-01  1.70959465e+00 -1.28338910e+00 -1.18381211e+00]
+ [-5.37177559e-01  7.88807586e-01 -1.16971425e+00 -1.31544430e+00]
+ [-9.00681170e-01  1.47939788e+00 -1.28338910e+00 -1.05217993e+00]
+ [-1.50652052e+00  1.24920112e+00 -1.56757623e+00 -1.31544430e+00]
+ [-9.00681170e-01  5.58610819e-01 -1.16971425e+00 -9.20547742e-01]
+ [-1.26418478e+00  7.88807586e-01 -1.05603939e+00 -1.31544430e+00]
+ [-1.02184904e+00 -1.31979479e-01 -1.22655167e+00 -1.31544430e+00]
+ [-1.02184904e+00  7.88807586e-01 -1.22655167e+00 -1.05217993e+00]
+ [-7.79513300e-01  1.01900435e+00 -1.28338910e+00 -1.31544430e+00]
+ [-7.79513300e-01  7.88807586e-01 -1.34022653e+00 -1.31544430e+00]
+ [-1.38535265e+00  3.28414053e-01 -1.22655167e+00 -1.31544430e+00]
+ [-1.26418478e+00  9.82172869e-02 -1.22655167e+00 -1.31544430e+00]
+ [-5.37177559e-01  7.88807586e-01 -1.28338910e+00 -1.05217993e+00]
+ [-7.79513300e-01  2.40018495e+00 -1.28338910e+00 -1.44707648e+00]
+ [-4.16009689e-01  2.63038172e+00 -1.34022653e+00 -1.31544430e+00]
+ [-1.14301691e+00  9.82172869e-02 -1.28338910e+00 -1.31544430e+00]
+ [-1.02184904e+00  3.28414053e-01 -1.45390138e+00 -1.31544430e+00]
+ [-4.16009689e-01  1.01900435e+00 -1.39706395e+00 -1.31544430e+00]
+ [-1.14301691e+00  1.24920112e+00 -1.34022653e+00 -1.44707648e+00]
+ [-1.74885626e+00 -1.31979479e-01 -1.39706395e+00 -1.31544430e+00]
+ [-9.00681170e-01  7.88807586e-01 -1.28338910e+00 -1.31544430e+00]
+ [-1.02184904e+00  1.01900435e+00 -1.39706395e+00 -1.18381211e+00]
+ [-1.62768839e+00 -1.74335684e+00 -1.39706395e+00 -1.18381211e+00]
+ [-1.74885626e+00  3.28414053e-01 -1.39706395e+00 -1.31544430e+00]
+ [-1.02184904e+00  1.01900435e+00 -1.22655167e+00 -7.88915558e-01]
+ [-9.00681170e-01  1.70959465e+00 -1.05603939e+00 -1.05217993e+00]
+ [-1.26418478e+00 -1.31979479e-01 -1.34022653e+00 -1.18381211e+00]
+ [-9.00681170e-01  1.70959465e+00 -1.22655167e+00 -1.31544430e+00]
+ [-1.50652052e+00  3.28414053e-01 -1.34022653e+00 -1.31544430e+00]
+ [-6.58345429e-01  1.47939788e+00 -1.28338910e+00 -1.31544430e+00]
+ [-1.02184904e+00  5.58610819e-01 -1.34022653e+00 -1.31544430e+00]
+ [ 1.40150837e+00  3.28414053e-01  5.35408562e-01  2.64141916e-01]
+ [ 6.74501145e-01  3.28414053e-01  4.21733708e-01  3.95774101e-01]
+ [ 1.28034050e+00  9.82172869e-02  6.49083415e-01  3.95774101e-01]
+ [-4.16009689e-01 -1.74335684e+00  1.37546573e-01  1.32509732e-01]
+ [ 7.95669016e-01 -5.92373012e-01  4.78571135e-01  3.95774101e-01]
+ [-1.73673948e-01 -5.92373012e-01  4.21733708e-01  1.32509732e-01]
+ [ 5.53333275e-01  5.58610819e-01  5.35408562e-01  5.27406285e-01]
+ [-1.14301691e+00 -1.51316008e+00 -2.60315415e-01 -2.62386821e-01]
+ [ 9.16836886e-01 -3.62176246e-01  4.78571135e-01  1.32509732e-01]
+ [-7.79513300e-01 -8.22569778e-01  8.07091462e-02  2.64141916e-01]
+ [-1.02184904e+00 -2.43394714e+00 -1.46640561e-01 -2.62386821e-01]
+ [ 6.86617933e-02 -1.31979479e-01  2.51221427e-01  3.95774101e-01]
+ [ 1.89829664e-01 -1.97355361e+00  1.37546573e-01 -2.62386821e-01]
+ [ 3.10997534e-01 -3.62176246e-01  5.35408562e-01  2.64141916e-01]
+ [-2.94841818e-01 -3.62176246e-01 -8.98031345e-02  1.32509732e-01]
+ [ 1.03800476e+00  9.82172869e-02  3.64896281e-01  2.64141916e-01]
+ [-2.94841818e-01 -1.31979479e-01  4.21733708e-01  3.95774101e-01]
+ [-5.25060772e-02 -8.22569778e-01  1.94384000e-01 -2.62386821e-01]
+ [ 4.32165405e-01 -1.97355361e+00  4.21733708e-01  3.95774101e-01]
+ [-2.94841818e-01 -1.28296331e+00  8.07091462e-02 -1.30754636e-01]
+ [ 6.86617933e-02  3.28414053e-01  5.92245988e-01  7.90670654e-01]
+ [ 3.10997534e-01 -5.92373012e-01  1.37546573e-01  1.32509732e-01]
+ [ 5.53333275e-01 -1.28296331e+00  6.49083415e-01  3.95774101e-01]
+ [ 3.10997534e-01 -5.92373012e-01  5.35408562e-01  8.77547895e-04]
+ [ 6.74501145e-01 -3.62176246e-01  3.08058854e-01  1.32509732e-01]
+ [ 9.16836886e-01 -1.31979479e-01  3.64896281e-01  2.64141916e-01]
+ [ 1.15917263e+00 -5.92373012e-01  5.92245988e-01  2.64141916e-01]
+ [ 1.03800476e+00 -1.31979479e-01  7.05920842e-01  6.59038469e-01]
+ [ 1.89829664e-01 -3.62176246e-01  4.21733708e-01  3.95774101e-01]
+ [-1.73673948e-01 -1.05276654e+00 -1.46640561e-01 -2.62386821e-01]
+ [-4.16009689e-01 -1.51316008e+00  2.38717193e-02 -1.30754636e-01]
+ [-4.16009689e-01 -1.51316008e+00 -3.29657076e-02 -2.62386821e-01]
+ [-5.25060772e-02 -8.22569778e-01  8.07091462e-02  8.77547895e-04]
+ [ 1.89829664e-01 -8.22569778e-01  7.62758269e-01  5.27406285e-01]
+ [-5.37177559e-01 -1.31979479e-01  4.21733708e-01  3.95774101e-01]
+ [ 1.89829664e-01  7.88807586e-01  4.21733708e-01  5.27406285e-01]
+ [ 1.03800476e+00  9.82172869e-02  5.35408562e-01  3.95774101e-01]
+ [ 5.53333275e-01 -1.74335684e+00  3.64896281e-01  1.32509732e-01]
+ [-2.94841818e-01 -1.31979479e-01  1.94384000e-01  1.32509732e-01]
+ [-4.16009689e-01 -1.28296331e+00  1.37546573e-01  1.32509732e-01]
+ [-4.16009689e-01 -1.05276654e+00  3.64896281e-01  8.77547895e-04]
+ [ 3.10997534e-01 -1.31979479e-01  4.78571135e-01  2.64141916e-01]
+ [-5.25060772e-02 -1.05276654e+00  1.37546573e-01  8.77547895e-04]
+ [-1.02184904e+00 -1.74335684e+00 -2.60315415e-01 -2.62386821e-01]
+ [-2.94841818e-01 -8.22569778e-01  2.51221427e-01  1.32509732e-01]
+ [-1.73673948e-01 -1.31979479e-01  2.51221427e-01  8.77547895e-04]
+ [-1.73673948e-01 -3.62176246e-01  2.51221427e-01  1.32509732e-01]
+ [ 4.32165405e-01 -3.62176246e-01  3.08058854e-01  1.32509732e-01]
+ [-9.00681170e-01 -1.28296331e+00 -4.30827696e-01 -1.30754636e-01]
+ [-1.73673948e-01 -5.92373012e-01  1.94384000e-01  1.32509732e-01]
+ [ 5.53333275e-01  5.58610819e-01  1.27429511e+00  1.71209594e+00]
+ [-5.25060772e-02 -8.22569778e-01  7.62758269e-01  9.22302838e-01]
+ [ 1.52267624e+00 -1.31979479e-01  1.21745768e+00  1.18556721e+00]
+ [ 5.53333275e-01 -3.62176246e-01  1.04694540e+00  7.90670654e-01]
+ [ 7.95669016e-01 -1.31979479e-01  1.16062026e+00  1.31719939e+00]
+ [ 2.12851559e+00 -1.31979479e-01  1.61531967e+00  1.18556721e+00]
+ [-1.14301691e+00 -1.28296331e+00  4.21733708e-01  6.59038469e-01]
+ [ 1.76501198e+00 -3.62176246e-01  1.44480739e+00  7.90670654e-01]
+ [ 1.03800476e+00 -1.28296331e+00  1.16062026e+00  7.90670654e-01]
+ [ 1.64384411e+00  1.24920112e+00  1.33113254e+00  1.71209594e+00]
+ [ 7.95669016e-01  3.28414053e-01  7.62758269e-01  1.05393502e+00]
+ [ 6.74501145e-01 -8.22569778e-01  8.76433123e-01  9.22302838e-01]
+ [ 1.15917263e+00 -1.31979479e-01  9.90107977e-01  1.18556721e+00]
+ [-1.73673948e-01 -1.28296331e+00  7.05920842e-01  1.05393502e+00]
+ [-5.25060772e-02 -5.92373012e-01  7.62758269e-01  1.58046376e+00]
+ [ 6.74501145e-01  3.28414053e-01  8.76433123e-01  1.44883158e+00]
+ [ 7.95669016e-01 -1.31979479e-01  9.90107977e-01  7.90670654e-01]
+ [ 2.24968346e+00  1.70959465e+00  1.67215710e+00  1.31719939e+00]
+ [ 2.24968346e+00 -1.05276654e+00  1.78583195e+00  1.44883158e+00]
+ [ 1.89829664e-01 -1.97355361e+00  7.05920842e-01  3.95774101e-01]
+ [ 1.28034050e+00  3.28414053e-01  1.10378283e+00  1.44883158e+00]
+ [-2.94841818e-01 -5.92373012e-01  6.49083415e-01  1.05393502e+00]
+ [ 2.24968346e+00 -5.92373012e-01  1.67215710e+00  1.05393502e+00]
+ [ 5.53333275e-01 -8.22569778e-01  6.49083415e-01  7.90670654e-01]
+ [ 1.03800476e+00  5.58610819e-01  1.10378283e+00  1.18556721e+00]
+ [ 1.64384411e+00  3.28414053e-01  1.27429511e+00  7.90670654e-01]
+ [ 4.32165405e-01 -5.92373012e-01  5.92245988e-01  7.90670654e-01]
+ [ 3.10997534e-01 -1.31979479e-01  6.49083415e-01  7.90670654e-01]
+ [ 6.74501145e-01 -5.92373012e-01  1.04694540e+00  1.18556721e+00]
+ [ 1.64384411e+00 -1.31979479e-01  1.16062026e+00  5.27406285e-01]
+ [ 1.88617985e+00 -5.92373012e-01  1.33113254e+00  9.22302838e-01]
+ [ 2.49201920e+00  1.70959465e+00  1.50164482e+00  1.05393502e+00]
+ [ 6.74501145e-01 -5.92373012e-01  1.04694540e+00  1.31719939e+00]
+ [ 5.53333275e-01 -5.92373012e-01  7.62758269e-01  3.95774101e-01]
+ [ 3.10997534e-01 -1.05276654e+00  1.04694540e+00  2.64141916e-01]
+ [ 2.24968346e+00 -1.31979479e-01  1.33113254e+00  1.44883158e+00]
+ [ 5.53333275e-01  7.88807586e-01  1.04694540e+00  1.58046376e+00]
+ [ 6.74501145e-01  9.82172869e-02  9.90107977e-01  7.90670654e-01]
+ [ 1.89829664e-01 -1.31979479e-01  5.92245988e-01  7.90670654e-01]
+ [ 1.28034050e+00  9.82172869e-02  9.33270550e-01  1.18556721e+00]
+ [ 1.03800476e+00  9.82172869e-02  1.04694540e+00  1.58046376e+00]
+ [ 1.28034050e+00  9.82172869e-02  7.62758269e-01  1.44883158e+00]
+ [-5.25060772e-02 -8.22569778e-01  7.62758269e-01  9.22302838e-01]
+ [ 1.15917263e+00  3.28414053e-01  1.21745768e+00  1.44883158e+00]
+ [ 1.03800476e+00  5.58610819e-01  1.10378283e+00  1.71209594e+00]
+ [ 1.03800476e+00 -1.31979479e-01  8.19595696e-01  1.44883158e+00]
+ [ 5.53333275e-01 -1.28296331e+00  7.05920842e-01  9.22302838e-01]
+ [ 7.95669016e-01 -1.31979479e-01  8.19595696e-01  1.05393502e+00]
+ [ 4.32165405e-01  7.88807586e-01  9.33270550e-01  1.44883158e+00]
+ [ 6.86617933e-02 -1.31979479e-01  7.62758269e-01  7.90670654e-01]]
+</code></pre><p>两个特征之间的协方差</p>
+<script type="math/tex; mode=display">
+\sigma_{j k}=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i j}-\overline{x}_{j}\right)\left(x_{i k}-\overline{x}_{k}\right)</script><p>协方差矩阵</p>
+<script type="math/tex; mode=display">
+\Sigma=\frac{1}{n-1}\left((\mathbf{X}-\overline{\mathbf{x}})^{T}(\mathbf{X}-\overline{\mathbf{x}})\right)</script><p>where $\overline{\mathbf{X}}$ is the mean vector $\overline{\mathbf{x}}=\frac{1}{n} \sum_{k=1}^{n} x_{i}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 手工算解协方差</span></span><br><span class="line">mean_vec = np.mean(X_std, axis = <span class="number">0</span>)</span><br><span class="line">cov_mat = (X_std - mean_vec).T.dot((X_std - mean_vec)) / (X_std.shape[<span class="number">0</span>]<span class="number">-1</span>)</span><br><span class="line">print(<span class="string">'Coveriance matrix:\n%s'</span>%cov_mat)</span><br></pre></td></tr></table></figure>
+<pre><code>Coveriance matrix:
+[[ 1.00671141 -0.11835884  0.87760447  0.82343066]
+ [-0.11835884  1.00671141 -0.43131554 -0.36858315]
+ [ 0.87760447 -0.43131554  1.00671141  0.96932762]
+ [ 0.82343066 -0.36858315  0.96932762  1.00671141]]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用numpy求解协方差</span></span><br><span class="line">print(<span class="string">'Numpy covariance matrix:\n%s'</span> %np.cov(X_std.T))</span><br></pre></td></tr></table></figure>
+<pre><code>Numpy covariance matrix:
+[[ 1.00671141 -0.11835884  0.87760447  0.82343066]
+ [-0.11835884  1.00671141 -0.43131554 -0.36858315]
+ [ 0.87760447 -0.43131554  1.00671141  0.96932762]
+ [ 0.82343066 -0.36858315  0.96932762  1.00671141]]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算特征值和特征向量</span></span><br><span class="line">cov_mat = np.cov(X_std.T)</span><br><span class="line">eig_vals, eig_vecs = np.linalg.eig(cov_mat)</span><br><span class="line">print(<span class="string">'Eigenvectors \n%s'</span> %eig_vecs)</span><br><span class="line">print(<span class="string">'\nEigenvalues\n%s'</span> %eig_vals)</span><br></pre></td></tr></table></figure>
+<pre><code>Eigenvectors
+[[ 0.52106591 -0.37741762 -0.71956635  0.26128628]
+ [-0.26934744 -0.92329566  0.24438178 -0.12350962]
+ [ 0.5804131  -0.02449161  0.14212637 -0.80144925]
+ [ 0.56485654 -0.06694199  0.63427274  0.52359713]]
+
+Eigenvalues
+[2.93808505 0.9201649  0.14774182 0.02085386]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># make a list of (eigenvalue,eigenvector) tuples 特征值表示特征向量的重要程度</span></span><br><span class="line">eig_pairs = [(np.abs(eig_vals[i]), eig_vecs[:,i])<span class="keyword">for</span> i <span class="keyword">in</span> range(len(eig_vals))]</span><br><span class="line">print(eig_pairs)</span><br><span class="line">print(<span class="string">"------------------"</span>)</span><br><span class="line">eig_pairs.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>], reverse=<span class="keyword">True</span>)</span><br><span class="line">print(<span class="string">'eigenvalues in descending order:'</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> eig_pairs:</span><br><span class="line">    print(i[<span class="number">0</span>])</span><br><span class="line">    print(i[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>[(2.9380850501999953, array([ 0.52106591, -0.26934744,  0.5804131 ,  0.56485654])), (0.920164904162487, array([-0.37741762, -0.92329566, -0.02449161, -0.06694199])), (0.14774182104494807, array([-0.71956635,  0.24438178,  0.14212637,  0.63427274])), (0.020853862176462408, array([ 0.26128628, -0.12350962, -0.80144925,  0.52359713]))]
+------------------
+eigenvalues in descending order:
+2.9380850501999953
+[ 0.52106591 -0.26934744  0.5804131   0.56485654]
+0.920164904162487
+[-0.37741762 -0.92329566 -0.02449161 -0.06694199]
+0.14774182104494807
+[-0.71956635  0.24438178  0.14212637  0.63427274]
+0.020853862176462408
+[ 0.26128628 -0.12350962 -0.80144925  0.52359713]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(a)</span><br><span class="line">print(np.cumsum(a))</span><br></pre></td></tr></table></figure>
+<pre><code>[1 2 3 4]
+[ 1  3  6 10]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tot = sum(eig_vals)</span><br><span class="line">var_exp = [(i / tot)*<span class="number">100</span> <span class="keyword">for</span> i <span class="keyword">in</span> sorted(eig_vals, reverse=<span class="keyword">True</span>)]</span><br><span class="line">print(var_exp)</span><br><span class="line">cum_var_exp = np.cumsum(var_exp)</span><br><span class="line">cum_var_exp</span><br></pre></td></tr></table></figure>
+<pre><code>[72.96244541329987, 22.850761786701757, 3.6689218892828763, 0.5178709107154831]
+
+
+
+
+
+array([ 72.96244541,  95.8132072 ,  99.48212909, 100.        ])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">plt.bar(range(<span class="number">4</span>), var_exp, alpha=<span class="number">0.5</span>, align=<span class="string">'center'</span>,</span><br><span class="line">       label=<span class="string">'individual explained variance'</span>)</span><br><span class="line">plt.step(range(<span class="number">4</span>),cum_var_exp, where=<span class="string">'mid'</span>,</span><br><span class="line">        label=<span class="string">'cumulative explained variance'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'explained variance ratio'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'principal compontents'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'best'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/principal_component_analysis/output_17_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#利用前两个较大的特征值对应的特征向量得到一个4*2的矩阵（由150*4的矩阵变成150*2的特征矩阵 就需要乘以4*2的矩阵）</span></span><br><span class="line">matrix_w = np.hstack((eig_pairs[<span class="number">0</span>][<span class="number">1</span>].reshape(<span class="number">4</span>,<span class="number">1</span>),</span><br><span class="line">                     eig_pairs[<span class="number">1</span>][<span class="number">1</span>].reshape(<span class="number">4</span>,<span class="number">1</span>)))</span><br><span class="line">print(<span class="string">'Matrix W:\n'</span>, matrix_w)</span><br></pre></td></tr></table></figure>
+<pre><code>Matrix W:
+ [[ 0.52106591 -0.37741762]
+ [-0.26934744 -0.92329566]
+ [ 0.5804131  -0.02449161]
+ [ 0.56485654 -0.06694199]]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Y = X_std.dot(matrix_w)</span><br><span class="line">Y</span><br></pre></td></tr></table></figure>
+<pre><code>array([[-2.26470281, -0.4800266 ],
+       [-2.08096115,  0.67413356],
+       [-2.36422905,  0.34190802],
+       [-2.29938422,  0.59739451],
+       [-2.38984217, -0.64683538],
+       [-2.07563095, -1.48917752],
+       [-2.44402884, -0.0476442 ],
+       [-2.23284716, -0.22314807],
+       [-2.33464048,  1.11532768],
+       [-2.18432817,  0.46901356],
+       [-2.1663101 , -1.04369065],
+       [-2.32613087, -0.13307834],
+       [-2.2184509 ,  0.72867617],
+       [-2.6331007 ,  0.96150673],
+       [-2.1987406 , -1.86005711],
+       [-2.26221453, -2.68628449],
+       [-2.2075877 , -1.48360936],
+       [-2.19034951, -0.48883832],
+       [-1.898572  , -1.40501879],
+       [-2.34336905, -1.12784938],
+       [-1.914323  , -0.40885571],
+       [-2.20701284, -0.92412143],
+       [-2.7743447 , -0.45834367],
+       [-1.81866953, -0.08555853],
+       [-2.22716331, -0.13725446],
+       [-1.95184633,  0.62561859],
+       [-2.05115137, -0.24216355],
+       [-2.16857717, -0.52714953],
+       [-2.13956345, -0.31321781],
+       [-2.26526149,  0.3377319 ],
+       [-2.14012214,  0.50454069],
+       [-1.83159477, -0.42369507],
+       [-2.61494794, -1.79357586],
+       [-2.44617739, -2.15072788],
+       [-2.10997488,  0.46020184],
+       [-2.2078089 ,  0.2061074 ],
+       [-2.04514621, -0.66155811],
+       [-2.52733191, -0.59229277],
+       [-2.42963258,  0.90418004],
+       [-2.16971071, -0.26887896],
+       [-2.28647514, -0.44171539],
+       [-1.85812246,  2.33741516],
+       [-2.5536384 ,  0.47910069],
+       [-1.96444768, -0.47232667],
+       [-2.13705901, -1.14222926],
+       [-2.0697443 ,  0.71105273],
+       [-2.38473317, -1.1204297 ],
+       [-2.39437631,  0.38624687],
+       [-2.22944655, -0.99795976],
+       [-2.20383344, -0.00921636],
+       [ 1.10178118, -0.86297242],
+       [ 0.73133743, -0.59461473],
+       [ 1.24097932, -0.61629765],
+       [ 0.40748306,  1.75440399],
+       [ 1.0754747 ,  0.20842105],
+       [ 0.38868734,  0.59328364],
+       [ 0.74652974, -0.77301931],
+       [-0.48732274,  1.85242909],
+       [ 0.92790164, -0.03222608],
+       [ 0.01142619,  1.03401828],
+       [-0.11019628,  2.65407282],
+       [ 0.44069345,  0.06329519],
+       [ 0.56210831,  1.76472438],
+       [ 0.71956189,  0.18622461],
+       [-0.0333547 ,  0.43900321],
+       [ 0.87540719, -0.50906396],
+       [ 0.35025167,  0.19631173],
+       [ 0.15881005,  0.79209574],
+       [ 1.22509363,  1.6222438 ],
+       [ 0.1649179 ,  1.30260923],
+       [ 0.73768265, -0.39657156],
+       [ 0.47628719,  0.41732028],
+       [ 1.2341781 ,  0.93332573],
+       [ 0.6328582 ,  0.41638772],
+       [ 0.70266118,  0.06341182],
+       [ 0.87427365, -0.25079339],
+       [ 1.25650912,  0.07725602],
+       [ 1.35840512, -0.33131168],
+       [ 0.66480037,  0.22592785],
+       [-0.04025861,  1.05871855],
+       [ 0.13079518,  1.56227183],
+       [ 0.02345269,  1.57247559],
+       [ 0.24153827,  0.77725638],
+       [ 1.06109461,  0.63384324],
+       [ 0.22397877,  0.28777351],
+       [ 0.42913912, -0.84558224],
+       [ 1.04872805, -0.5220518 ],
+       [ 1.04453138,  1.38298872],
+       [ 0.06958832,  0.21950333],
+       [ 0.28347724,  1.32932464],
+       [ 0.27907778,  1.12002852],
+       [ 0.62456979, -0.02492303],
+       [ 0.33653037,  0.98840402],
+       [-0.36218338,  2.01923787],
+       [ 0.28858624,  0.85573032],
+       [ 0.09136066,  0.18119213],
+       [ 0.22771687,  0.38492008],
+       [ 0.57638829,  0.1548736 ],
+       [-0.44766702,  1.54379203],
+       [ 0.25673059,  0.5988518 ],
+       [ 1.84456887, -0.87042131],
+       [ 1.15788161,  0.69886986],
+       [ 2.20526679, -0.56201048],
+       [ 1.44015066,  0.04698759],
+       [ 1.86781222, -0.29504482],
+       [ 2.75187334, -0.8004092 ],
+       [ 0.36701769,  1.56150289],
+       [ 2.30243944, -0.42006558],
+       [ 2.00668647,  0.71143865],
+       [ 2.25977735, -1.92101038],
+       [ 1.36417549, -0.69275645],
+       [ 1.60267867,  0.42170045],
+       [ 1.8839007 , -0.41924965],
+       [ 1.2601151 ,  1.16226042],
+       [ 1.4676452 ,  0.44227159],
+       [ 1.59007732, -0.67624481],
+       [ 1.47143146, -0.25562182],
+       [ 2.42632899, -2.55666125],
+       [ 3.31069558, -0.01778095],
+       [ 1.26376667,  1.70674538],
+       [ 2.0377163 , -0.91046741],
+       [ 0.97798073,  0.57176432],
+       [ 2.89765149, -0.41364106],
+       [ 1.33323218,  0.48181122],
+       [ 1.7007339 , -1.01392187],
+       [ 1.95432671, -1.0077776 ],
+       [ 1.17510363,  0.31639447],
+       [ 1.02095055, -0.06434603],
+       [ 1.78834992,  0.18736121],
+       [ 1.86364755, -0.56229073],
+       [ 2.43595373, -0.25928443],
+       [ 2.30492772, -2.62632347],
+       [ 1.86270322,  0.17854949],
+       [ 1.11414774,  0.29292262],
+       [ 1.2024733 ,  0.81131527],
+       [ 2.79877045, -0.85680333],
+       [ 1.57625591, -1.06858111],
+       [ 1.3462921 , -0.42243061],
+       [ 0.92482492, -0.0172231 ],
+       [ 1.85204505, -0.67612817],
+       [ 2.01481043, -0.61388564],
+       [ 1.90178409, -0.68957549],
+       [ 1.15788161,  0.69886986],
+       [ 2.04055823, -0.8675206 ],
+       [ 1.9981471 , -1.04916875],
+       [ 1.87050329, -0.38696608],
+       [ 1.56458048,  0.89668681],
+       [ 1.5211705 , -0.26906914],
+       [ 1.37278779, -1.01125442],
+       [ 0.96065603,  0.02433167]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line"><span class="keyword">for</span> lab, col <span class="keyword">in</span> zip((<span class="string">'Iris-Setosa'</span>,<span class="string">'Iris-Versicolor'</span>,<span class="string">'Iris-Virginica'</span>),</span><br><span class="line">                   (<span class="string">'blue'</span>,<span class="string">'red'</span>,<span class="string">'green'</span>)):</span><br><span class="line">    plt.scatter(X[y==label_dict[lab], <span class="number">0</span>],</span><br><span class="line">               X[y==label_dict[lab], <span class="number">1</span>],</span><br><span class="line">               label = lab,</span><br><span class="line">               c = col)</span><br><span class="line">plt.xlabel(<span class="string">'sepal_len'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'sepla_wid'</span>)</span><br><span class="line">plt.legend(loc = <span class="string">'best'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/principal_component_analysis/output_20_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">6</span>, <span class="number">4</span>))</span><br><span class="line"><span class="keyword">for</span> lab, col <span class="keyword">in</span> zip((<span class="string">'Iris-Setosa'</span>,<span class="string">'Iris-Versicolor'</span>,<span class="string">'Iris-Virginica'</span>),</span><br><span class="line">                   (<span class="string">'blue'</span>,<span class="string">'red'</span>,<span class="string">'green'</span>)):</span><br><span class="line">        plt.scatter(Y[y==label_dict[lab], <span class="number">0</span>],</span><br><span class="line">               Y[y==label_dict[lab], <span class="number">1</span>],</span><br><span class="line">               label = lab,</span><br><span class="line">               c = col)</span><br><span class="line">plt.xlabel(<span class="string">'principal component 1'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'principal component 2'</span>)</span><br><span class="line">plt.legend(loc = <span class="string">'best'</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/principal_component_analysis/output_21_0.png" alt="png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/因子分析/" rel="tag"># 因子分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/25/统计描述概述/" rel="next" title="描述统计概述">
+                <i class="fa fa-chevron-left"></i> 描述统计概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Max Cao</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#因子分析"><span class="nav-number">1.</span> <span class="nav-text">因子分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#因子分析的基本思想"><span class="nav-number">1.1.</span> <span class="nav-text">因子分析的基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#因子分析的目的"><span class="nav-number">1.2.</span> <span class="nav-text">因子分析的目的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要内容"><span class="nav-number">1.2.1.</span> <span class="nav-text">主要内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主成分分析（PCA）"><span class="nav-number">1.3.</span> <span class="nav-text">主成分分析（PCA）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#principal-component-analysis"><span class="nav-number">1.3.1.</span> <span class="nav-text">principal component analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量的表示及基变换"><span class="nav-number">1.3.2.</span> <span class="nav-text">向量的表示及基变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基变换"><span class="nav-number">1.3.3.</span> <span class="nav-text">基变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协方差矩阵"><span class="nav-number">1.3.4.</span> <span class="nav-text">协方差矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协方差"><span class="nav-number">1.3.5.</span> <span class="nav-text">协方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化目标"><span class="nav-number">1.3.6.</span> <span class="nav-text">优化目标</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max Cao</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>人
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
