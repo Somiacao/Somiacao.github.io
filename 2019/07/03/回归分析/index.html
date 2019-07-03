@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="回归分析,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="回归分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回归分析">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/回归分析/index.html">
+<meta property="og:site_name" content="最可爱的人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/theme.png">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/p1.png">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/p2.png">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/output_26_0.png">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/output_30_0.png">
+<meta property="og:updated_time" content="2019-07-03T00:47:30.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回归分析">
+<meta name="twitter:image" content="https://somiacao.github.io/images/regression_analysis/theme.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/03/回归分析/">
+
+
+
+
+
+  <title>回归分析 | 最可爱的人</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband">
+       <a href="https://github.com/Somiacao"><img style="position: fixed; top: 0; right: 0; border: 0;" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_orange_ff7600.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    </div>
+    
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最可爱的人</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/回归分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Max Cao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最可爱的人">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">回归分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T00:00:00+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">Python数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://somiacao.github.io/images/regression_analysis/theme.png" alt="png"><br><a id="more"></a></p>
+<h1 id="回归分析"><a href="#回归分析" class="headerlink" title="回归分析"></a>回归分析</h1><p>相关分析是研究两个或两个以上的变量之间相关程度及大小的一种统计方法</p>
+<p>回归分析是寻找存在相关关系的变量间的数学表达式，并进行统计推断的一种统计方法</p>
+<p>在对回归分析进行分类时，主要有两种分类方式：</p>
+<p>（1）根据变量的数目，可以分类一元回归、多元回归</p>
+<p>（2）根据自变量和因变量的表现形式，可分为线性与非线性</p>
+<p>所以，回归分析包括四个方向：一元线性回归分析、多元线性回归分析、一元非线性回归分析、多元非线性回归分析</p>
+<p><img src="https://somiacao.github.io/images/regression_analysis/p1.png" alt="png"></p>
+<h2 id="回归分析的一般步骤"><a href="#回归分析的一般步骤" class="headerlink" title="回归分析的一般步骤"></a>回归分析的一般步骤</h2><p><img src="https://somiacao.github.io/images/regression_analysis/p2.png" alt="png"></p>
+<h2 id="一元线性回归"><a href="#一元线性回归" class="headerlink" title="一元线性回归"></a>一元线性回归</h2><ul>
+<li>因变量（dependent variable）：被预测或被解释的变量，用y表示</li>
+<li>自变量（independent variable）：预测或解释因变量的一个或多个变量，用x表示</li>
+<li>对于具有线性关系的两个变量，可以用一个方程来表示它们之间的线性关系</li>
+<li><p>描述因变量y如何依赖于自变量x和误差项 $\varepsilon$ 的方程称为回归方程。对于只涉及一个自变量的一元线性回归模型可表示如下：</p>
+<script type="math/tex; mode=display">y=\beta_{0}+\beta_{1} x+\varepsilon</script></li>
+<li><p>y叫做因变量或者被解释变量</p>
+</li>
+<li>x叫做自变量或者解释变量</li>
+<li>$\beta_0$ 表示截距</li>
+<li>$\beta_1$ 表示斜率</li>
+<li>$\varepsilon$ 表示误差项，反映除x和y之间的线性关系之外的随机因素对y的影响</li>
+</ul>
+<h2 id="回归方程"><a href="#回归方程" class="headerlink" title="回归方程"></a>回归方程</h2><p>描述因变量y的期望值如何依赖自变量x的方程称为回归方程。根据对一元线性回归模型的假设，可以得到它的回归方程：</p>
+<script type="math/tex; mode=display">
+E(y)=\beta_{0}+\beta_{1} x</script><ul>
+<li>如果回归方程中参数已知，对于一个给定的x值，利用回归方程就能计算出y的期望值</li>
+<li>用样本统计量代替回归方程中的未知参数，就可以得到估计的回归参数，简称回归直线</li>
+</ul>
+<p>假设 $\theta_1$ 是年龄的参数， $\theta_2$ 是工资的参数</p>
+<p>拟合的平面：$h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} x_{2}$ （ $\theta_0$ 是偏置项）</p>
+<p>整合:$h_{\theta}(x)=\sum_{i=0}^{n} \theta_{i} x_{i}=\theta^{T} x$</p>
+<p><strong> 误差 </strong><br>真实值和预测值之间肯定要存在差异的（用 $\varepsilon$ 来表示该误差）</p>
+<p>对于每个样本：$y^{(i)}=\theta^{T} x^{(i)}+\varepsilon^{(i)}$</p>
+<p>误差 $\varepsilon^{(i)}$ 是独立并且具有相同的分布，并且服从均值为0方差为 $\theta^{2}$ 的高斯分布。</p>
+<p>独立：张三和李四来贷款，他两没关系</p>
+<p>同分布：他两都来的是我们假定的这家银行</p>
+<p>高斯分布：银行可能会给多，也可能会给少，但是绝大多数情况下这个浮动不会太大，极小的情况下浮动比较大，符合正常情况</p>
+<p>预测值与误差：$y^{(i)}=\theta^{T} x^{(i)}+\varepsilon^{(i)}$（1）</p>
+<p>由于误差服从高斯分布：$p\left(\epsilon^{(i)}\right)=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(\epsilon^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$（2）</p>
+<p>将（1）式带入（2）式：$p\left(y^{(i)} | x^{(i)} ; \theta\right)=\frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$</p>
+<p>似然函数：$L(\theta)=\prod_{i=1}^{m} p\left(y^{(i)} | x^{(i)} ; \theta\right)=\prod_{i=1}^{m} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$</p>
+<p>解释：什么样的参数跟我们的数据组合后恰好是真实值</p>
+<p>对数似然：$\log L(\theta)=\log \prod_{i=1}^{m} \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$</p>
+<p>解释：乘法难解，加法容易多了，对数里面乘法可以转化为加法</p>
+<p>展开化简：$\sum_{i=1}^{m} \log \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$<br>$=m \log \frac{1}{\sqrt{2 \pi} \sigma}-\frac{1}{\sigma^{2}} \cdot \frac{1}{2} \sum_{i=1}^{m}\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}$</p>
+<p>目标：让似然函数（对数变换后也一样）越大越好</p>
+<script type="math/tex; mode=display">
+J(\theta)=\frac{1}{2} \sum_{i=1}^{m}\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}
+$$(最小二乘法)
+
+使用最小二乘法的原因是因为从求解误差的过程中，利用高斯分布以及似然函数进行化简
+
+## 参数的最小二乘法估计
+对于回归方程，关键在于求解参数，常用高斯提出最小二乘法，它是使因变量的观察值y与估计值之间的离差平方和达到最小来求解</script><p>Q=\sum(y-\hat{y})^{2}=\sum\left(y-\hat{\beta}_{0}-\hat{\beta}_{1} x\right)^{2}</p>
+<script type="math/tex; mode=display">
+
+![png](https://somiacao.github.io/images/regression_analysis/p3.png)
+
+展开可得：</script><p>Q=\sum y^{2}+n \hat{\beta}_{0}^{2}+\hat{\beta}_{1}^{2} \Sigma x^{2}+2 \hat{\beta}_{0} \hat{\beta}_{1} \Sigma x-2 \hat{\beta}_{0} \sum y-2 \hat{\beta}_{1} \Sigma x y</p>
+<script type="math/tex; mode=display">
+求偏导可得：（对$\beta_0$和$\beta_1$求偏导等于0）</script><p>\left\{\begin{array}{c}{\sum \mathrm{y}=n \hat{\beta}_{0}+\hat{\beta}_{1} \sum x} \\ {\sum x y=2 \hat{\beta}_{0} \sum x+\hat{\beta}_{1} \sum x^{2}}\end{array}\right.</p>
+<script type="math/tex; mode=display">
+求解：</script><p>\left\{\begin{aligned} \hat{\beta}_{1}=&amp; \frac{n \sum x y-\sum x \sum y}{n \sum x^{2}-\left(\sum x\right)^{2}} \\ &amp; \hat{\beta}_{0}=\overline{y}-\hat{\beta}_{1} \overline{x} \end{aligned}\right.</p>
+<script type="math/tex; mode=display">
+
+### 利用回归直线进行估计和预测
+* 点估计：利用估计的回归方程，对于x的某一个特定的值，求出y的一个估计值就是点估计
+* 区间估计：利用估计的回归方程，对于x的一个特定值，求出y的一个估计值的区间就是区间估计
+
+**估计标准误差的计算**
+
+为了度量回归方程的可靠性，通常计算估计标准误差。它度量观察值回绕着回归直线的变化程度或分散程度。
+
+估计平均误差：</script><p>S_{y}=\sqrt{\frac{\sum(y-\hat{y})^{2}}{n-2}}</p>
+<script type="math/tex; mode=display">
+
+* 公式中根号内的分母是n-2,而不是n,自由度是n-2
+* 估计标准误差越大，则数据点围绕回归直线的分散程度就越大，回归方程的代表性就越小
+* 估计标准误差越小，则数据点围绕回归直线的分散程度就越小，回归方程的代表就越大，其代表性就越高
+
+**置信区间估计：**</script><p>\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</p>
+<script type="math/tex; mode=display">
+
+**在1- $\alpha$ 置信水平下预测区间**</script><p>\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{1+\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</p>
+<script type="math/tex; mode=display">
+
+
+### 回归直线的拟合优度
+回归直线与各观测点的接近程度称为回归直线对数据的拟合优度
+
+* 总平方和（SST）</script><p>\sum(y-\overline{y})^{2}</p>
+<script type="math/tex; mode=display">
+
+* 回归平方和（SSR）</script><p>\sum(\hat{y}-\overline{y})^{2}</p>
+<script type="math/tex; mode=display">
+
+* 残差平方和（SSE）</script><p>\Sigma(y-\hat{y})^{2}</p>
+<script type="math/tex; mode=display">
+
+总平方和可以分解为回归平方和、残差平方和两部分：SST=SSR+SSE
+
+* 总平方和（SST），反映因变量的n个观察值与其均值的总离差
+* 回归平方和（SSR），反映了y的总变差中，由于x与y之间的线性关系引起的y的部分变化
+* 残差平方和（SSE），反映了除了x和y的线性影响之外的其他因素对y变差的作用，是不能由回归直线来解释的y的变差部分
+
+## 判定系数
+回归平方和占总平方和的比例，用 $R^2$ 表示，其值在0到1之间
+
+* $R^2$ == 0：说明y的变化和x无关，x完全无助于解释y的变差
+* $R^2$ == 1: 说明残差平方和为0，拟合是完全的，y的变化只与x有关</script><p>R^{2}=\frac{S S R}{S S T}=\frac{\sum(\hat{y}-\overline{y})^{2}}{\sum(y-\overline{y})^{2}}=1-\frac{\sum(y-\hat{y})^{2}}{\sum(y-\overline{y})^{2}}</p>
+<script type="math/tex; mode=display">
+</script><p>\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}=\sum_{i=1}^{n}\left(\hat{y}_{i}-\overline{y}\right)^{2}+\sum_{i=1}^{n}\left(y_{i}-\hat{y}\right)^{2}</p>
+<script type="math/tex; mode=display">
+
+
+### 显著性检验
+显著性检验的主要目的是根据所建立的估计方程用自变量x来估计或预测因变量y的取值。当建立估计方程后，还不能马上进行估计或预测，因为该方程是根据样本数据得到的，它是否真实的反映了变量x和y之间的关系，则需要通过检验后才能证实。
+
+根据样本数据拟合回归方程时，实际上就已经假定变量x和y之间存在着线性关系，并假定误差项是一个服从正态分布的随机变量，且具有相同的方差。但这些假设是否成立需要检验
+
+显著性检验包括两方面：
+* 线性关系检验
+* 回归系数检验
+
+#### 线性关系检验
+线性关系检验是检验自变量x和因变量y之间线性关系是否显著，或者说，它们之间是否能用一个线性模型来表示。
+
+将均方回归（MSR）同均方残差（MSE）加以比较，应用F检验来分析二者之间的差别是否显著。
+
+* 均方回归：回归平方和SSR除以相应的自由度（自变量的个数K）
+* 均方残差：残差平方和SSE除以相应的自由度（n-k-1）
+
+H0: $\beta1=0$ 所有回归系数与零无显著差异，即y与x全体的线性关系不显著
+
+计算检验统计量F:</script><p>F=\frac{S S R / 1}{S S E / n-2}=\frac{M S R}{M S E} \sim F(1, n-2)</p>
+<script type="math/tex; mode=display">
+
+#### 回归系数的显著性检验
+回归系数显著性检验的目的是通过检验回归系数 $\beta$ 的值与0是否有显著性差异，来判断Y与X之间是否存在显著的线性关系。若 $\beta=0$ ，则总体回归方程中不含X项（即Y不随X的变动而变动），因此Y与X之间不存在线性关系；若 $\beta \neq 0$ ,说明变量Y与X之间存在显著的线性关系。
+
+## 多元线性回归
+经常会遇到某一现象的发展和变化取决于几个因素的影响，也就是一个因变量和几个自变量有依存关系的情况，这时需用多元线性回归分析。
+
+* 多元线性回归分析预测法，是指通过对两个或两个以上的自变量和一个因变量的相关分析，建立预测模型进行预测和控制的方法。
+* 多元线性回归预测模型一般是为：</script><p>y=A+B_{1} x_{1}+B_{2} x_{2}+B_{3} x_{3}+\ldots+B_{n} x_{n}+\varepsilon</p>
+<script type="math/tex; mode=display">
+
+**调整的多重判定系数：**
+用样本容量n和自变量的个数k去修正 $R^2$ 得到：</script><p>R_{a}^{2}=1-\left(1-R^{2}\right) \times \frac{n-1}{n-k-1}</p>
+<p>$$</p>
+<ul>
+<li>避免增加自变量而高估 $R^2$</li>
+</ul>
+<h2 id="回归分析-statsmodels"><a href="#回归分析-statsmodels" class="headerlink" title="回归分析-statsmodels"></a>回归分析-statsmodels</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> statsmodels.api <span class="keyword">as</span> sm</span><br><span class="line"></span><br><span class="line">nsample = <span class="number">20</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, nsample)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+<pre><code>[ 0.          0.52631579  1.05263158  1.57894737  2.10526316  2.63157895
+  3.15789474  3.68421053  4.21052632  4.73684211  5.26315789  5.78947368
+  6.31578947  6.84210526  7.36842105  7.89473684  8.42105263  8.94736842
+  9.47368421 10.        ]
+</code></pre><p><strong>一元线性回归</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = sm.add_constant(x)</span><br><span class="line">X</span><br></pre></td></tr></table></figure>
+<pre><code>array([[ 1.        ,  0.        ],
+       [ 1.        ,  0.52631579],
+       [ 1.        ,  1.05263158],
+       [ 1.        ,  1.57894737],
+       [ 1.        ,  2.10526316],
+       [ 1.        ,  2.63157895],
+       [ 1.        ,  3.15789474],
+       [ 1.        ,  3.68421053],
+       [ 1.        ,  4.21052632],
+       [ 1.        ,  4.73684211],
+       [ 1.        ,  5.26315789],
+       [ 1.        ,  5.78947368],
+       [ 1.        ,  6.31578947],
+       [ 1.        ,  6.84210526],
+       [ 1.        ,  7.36842105],
+       [ 1.        ,  7.89473684],
+       [ 1.        ,  8.42105263],
+       [ 1.        ,  8.94736842],
+       [ 1.        ,  9.47368421],
+       [ 1.        , 10.        ]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">beta = np.array([<span class="number">2</span>,<span class="number">5</span>])</span><br><span class="line">beta</span><br></pre></td></tr></table></figure>
+<pre><code>array([2, 5])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 误差项</span></span><br><span class="line">e = np.random.normal(size=nsample)</span><br><span class="line">e</span><br></pre></td></tr></table></figure>
+<pre><code>array([-0.00960225,  0.21731274,  0.11880485,  0.16054592, -0.19551901,
+        0.02599446, -0.33315494,  1.32793443,  1.12356062, -1.49859479,
+        1.78121287,  1.64770639, -0.17370083, -0.25115655, -1.21158177,
+       -0.73977046, -0.74188583, -0.20979014,  1.68448928,  0.36512761])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#实际y</span></span><br><span class="line">y = np.dot(X,beta)+e</span><br><span class="line">y</span><br></pre></td></tr></table></figure>
+<pre><code>array([ 1.99039775,  4.84889168,  7.38196274, 10.05528276, 12.33079678,
+       15.18388919, 17.45631874, 21.74898706, 24.17619219, 24.18561574,
+       30.09700234, 32.59507481, 33.40524653, 35.95936976, 37.63052349,
+       40.73391375, 43.36337733, 46.52705196, 51.05291033, 52.36512761])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最小二乘法</span></span><br><span class="line">model = sm.OLS(y, X)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拟合数据</span></span><br><span class="line">res = model.fit()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#回归系数</span></span><br><span class="line">res.params</span><br></pre></td></tr></table></figure>
+<pre><code>array([2.18157923, 4.99456348])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全部结果</span></span><br><span class="line">res.summary()</span><br></pre></td></tr></table></figure>
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared:         </th> <td>   0.996</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.996</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   4986.</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Jul 2019</td> <th>  Prob (F-statistic):</th> <td>1.87e-23</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>20:40:34</td>     <th>  Log-Likelihood:    </th> <td> -26.508</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   57.02</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    18</td>      <th>  BIC:               </th> <td>   59.01</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>const</th> <td>    2.1816</td> <td>    0.414</td> <td>    5.273</td> <td> 0.000</td> <td>    1.312</td> <td>    3.051</td>
+</tr>
+<tr>
+  <th>x1</th>    <td>    4.9946</td> <td>    0.071</td> <td>   70.615</td> <td> 0.000</td> <td>    4.846</td> <td>    5.143</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 0.687</td> <th>  Durbin-Watson:     </th> <td>   1.863</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.709</td> <th>  Jarque-Bera (JB):  </th> <td>   0.721</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.348</td> <th>  Prob(JB):          </th> <td>   0.697</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.383</td> <th>  Cond. No.          </th> <td>    11.5</td>
+</tr>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拟合的估计值</span></span><br><span class="line">y_ = res.fittedvalues</span><br><span class="line">y_</span><br></pre></td></tr></table></figure>
+<pre><code>array([ 2.18157923,  4.81029685,  7.43901447, 10.06773209, 12.69644971,
+       15.32516733, 17.95388495, 20.58260258, 23.2113202 , 25.84003782,
+       28.46875544, 31.09747306, 33.72619068, 36.3549083 , 38.98362592,
+       41.61234354, 44.24106117, 46.86977879, 49.49849641, 52.12721403])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">ax.plot(x, y, <span class="string">'o'</span>, label = <span class="string">'data'</span>)</span><br><span class="line">ax.plot(x,y_,<span class="string">'r--'</span>, label=<span class="string">'test'</span>)</span><br><span class="line">ax.legend(loc = <span class="string">'best'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/regression_analysis/output_26_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Y = 5+2*X+3*X^2</span></span><br><span class="line">nsample = <span class="number">50</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, nsample)</span><br><span class="line">X = np.column_stack((x, x**<span class="number">2</span>))</span><br><span class="line">X = sm.add_constant(X)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beta = np.array([<span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">e = np.random.normal(size = nsample)</span><br><span class="line">y = np.dot(X, beta) + e</span><br><span class="line">model = sm.OLS(y, X)</span><br><span class="line">results = model.fit()</span><br><span class="line">results.params</span><br></pre></td></tr></table></figure>
+<pre><code>array([4.70913383, 2.26332428, 2.97942821])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">results.summary()</span><br></pre></td></tr></table></figure>
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>            <td>y</td>        <th>  R-squared:         </th> <td>   1.000</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   1.000</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>3.365e+05</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Tue, 02 Jul 2019</td> <th>  Prob (F-statistic):</th> <td>2.17e-98</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>21:03:10</td>     <th>  Log-Likelihood:    </th> <td> -60.553</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    50</td>      <th>  AIC:               </th> <td>   127.1</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    47</td>      <th>  BIC:               </th> <td>   132.8</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>
+</tr>
+<tr>
+  <th>const</th> <td>    4.7091</td> <td>    0.342</td> <td>   13.781</td> <td> 0.000</td> <td>    4.022</td> <td>    5.397</td>
+</tr>
+<tr>
+  <th>x1</th>    <td>    2.2633</td> <td>    0.158</td> <td>   14.322</td> <td> 0.000</td> <td>    1.945</td> <td>    2.581</td>
+</tr>
+<tr>
+  <th>x2</th>    <td>    2.9794</td> <td>    0.015</td> <td>  194.956</td> <td> 0.000</td> <td>    2.949</td> <td>    3.010</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>19.265</td> <th>  Durbin-Watson:     </th> <td>   2.023</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  27.621</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 1.286</td> <th>  Prob(JB):          </th> <td>1.01e-06</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 5.577</td> <th>  Cond. No.          </th> <td>    142.</td>
+</tr>
+</table>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y_fitted = results.fittedvalues</span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line">ax.plot(x, y, <span class="string">'o'</span>, label = <span class="string">'data'</span>)</span><br><span class="line">ax.plot(x,y_fitted,<span class="string">'r--'</span>, label=<span class="string">'OLS'</span>)</span><br><span class="line">ax.legend(loc = <span class="string">'best'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://somiacao.github.io/images/regression_analysis/output_30_0.png" alt="png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/回归分析/" rel="tag"># 回归分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/01/因子分析-PCA主成分分析/" rel="next" title="因子分析-PCA主成分分析">
+                <i class="fa fa-chevron-left"></i> 因子分析-PCA主成分分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Max Cao</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回归分析"><span class="nav-number">1.</span> <span class="nav-text">回归分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析的一般步骤"><span class="nav-number">1.1.</span> <span class="nav-text">回归分析的一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一元线性回归"><span class="nav-number">1.2.</span> <span class="nav-text">一元线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归方程"><span class="nav-number">1.3.</span> <span class="nav-text">回归方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析-statsmodels"><span class="nav-number">1.4.</span> <span class="nav-text">回归分析-statsmodels</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Max Cao</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>人
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
