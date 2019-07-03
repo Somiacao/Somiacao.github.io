@@ -88,9 +88,10 @@
 <meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/theme.png">
 <meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/p1.jpg">
 <meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/p2.jpg">
+<meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/p3.png">
 <meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/output_26_0.png">
 <meta property="og:image" content="https://somiacao.github.io/images/regression_analysis/output_30_0.png">
-<meta property="og:updated_time" content="2019-07-03T00:53:07.994Z">
+<meta property="og:updated_time" content="2019-07-03T11:28:32.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回归分析">
 <meta name="twitter:image" content="https://somiacao.github.io/images/regression_analysis/theme.png">
@@ -405,110 +406,86 @@ E(y)=\beta_{0}+\beta_{1} x</script><ul>
 <p>展开化简：$\sum_{i=1}^{m} \log \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}}{2 \sigma^{2}}\right)$<br>$=m \log \frac{1}{\sqrt{2 \pi} \sigma}-\frac{1}{\sigma^{2}} \cdot \frac{1}{2} \sum_{i=1}^{m}\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}$</p>
 <p>目标：让似然函数（对数变换后也一样）越大越好</p>
 <script type="math/tex; mode=display">
-J(\theta)=\frac{1}{2} \sum_{i=1}^{m}\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}
-$$(最小二乘法)
-
-使用最小二乘法的原因是因为从求解误差的过程中，利用高斯分布以及似然函数进行化简
-
-## 参数的最小二乘法估计
-对于回归方程，关键在于求解参数，常用高斯提出最小二乘法，它是使因变量的观察值y与估计值之间的离差平方和达到最小来求解</script><p>Q=\sum(y-\hat{y})^{2}=\sum\left(y-\hat{\beta}_{0}-\hat{\beta}_{1} x\right)^{2}</p>
+J(\theta)=\frac{1}{2} \sum_{i=1}^{m}\left(y^{(i)}-\theta^{T} x^{(i)}\right)^{2}</script><p>(最小二乘法)</p>
+<p>使用最小二乘法的原因是因为从求解误差的过程中，利用高斯分布以及似然函数进行化简</p>
+<h2 id="参数的最小二乘法估计"><a href="#参数的最小二乘法估计" class="headerlink" title="参数的最小二乘法估计"></a>参数的最小二乘法估计</h2><p>对于回归方程，关键在于求解参数，常用高斯提出最小二乘法，它是使因变量的观察值y与估计值之间的离差平方和达到最小来求解</p>
 <script type="math/tex; mode=display">
-
-![png](https://somiacao.github.io/images/regression_analysis/p3.png)
-
-展开可得：</script><p>Q=\sum y^{2}+n \hat{\beta}_{0}^{2}+\hat{\beta}_{1}^{2} \Sigma x^{2}+2 \hat{\beta}_{0} \hat{\beta}_{1} \Sigma x-2 \hat{\beta}_{0} \sum y-2 \hat{\beta}_{1} \Sigma x y</p>
+Q=\sum(y-\hat{y})^{2}=\sum\left(y-\hat{\beta}_{0}-\hat{\beta}_{1} x\right)^{2}</script><p><img src="https://somiacao.github.io/images/regression_analysis/p3.png" alt="png"></p>
+<p>展开可得：</p>
 <script type="math/tex; mode=display">
-求偏导可得：（对$\beta_0$和$\beta_1$求偏导等于0）</script><p>\left\{\begin{array}{c}{\sum \mathrm{y}=n \hat{\beta}_{0}+\hat{\beta}_{1} \sum x} \\ {\sum x y=2 \hat{\beta}_{0} \sum x+\hat{\beta}_{1} \sum x^{2}}\end{array}\right.</p>
+Q=\sum y^{2}+n \hat{\beta}_{0}^{2}+\hat{\beta}_{1}^{2} \Sigma x^{2}+2 \hat{\beta}_{0} \hat{\beta}_{1} \Sigma x-2 \hat{\beta}_{0} \sum y-2 \hat{\beta}_{1} \Sigma x y</script><p>求偏导可得：（对$\beta_0$和$\beta_1$求偏导等于0）</p>
 <script type="math/tex; mode=display">
-求解：</script><p>\left\{\begin{aligned} \hat{\beta}_{1}=&amp; \frac{n \sum x y-\sum x \sum y}{n \sum x^{2}-\left(\sum x\right)^{2}} \\ &amp; \hat{\beta}_{0}=\overline{y}-\hat{\beta}_{1} \overline{x} \end{aligned}\right.</p>
+\left\{\begin{array}{c}{\sum \mathrm{y}=n \hat{\beta}_{0}+\hat{\beta}_{1} \sum x} \\ {\sum x y=2 \hat{\beta}_{0} \sum x+\hat{\beta}_{1} \sum x^{2}}\end{array}\right.</script><p>求解：</p>
 <script type="math/tex; mode=display">
-
-### 利用回归直线进行估计和预测
-* 点估计：利用估计的回归方程，对于x的某一个特定的值，求出y的一个估计值就是点估计
-* 区间估计：利用估计的回归方程，对于x的一个特定值，求出y的一个估计值的区间就是区间估计
-
-**估计标准误差的计算**
-
-为了度量回归方程的可靠性，通常计算估计标准误差。它度量观察值回绕着回归直线的变化程度或分散程度。
-
-估计平均误差：</script><p>S_{y}=\sqrt{\frac{\sum(y-\hat{y})^{2}}{n-2}}</p>
+\left\{\begin{aligned} \hat{\beta}_{1}=& \frac{n \sum x y-\sum x \sum y}{n \sum x^{2}-\left(\sum x\right)^{2}} \\ & \hat{\beta}_{0}=\overline{y}-\hat{\beta}_{1} \overline{x} \end{aligned}\right.</script><h3 id="利用回归直线进行估计和预测"><a href="#利用回归直线进行估计和预测" class="headerlink" title="利用回归直线进行估计和预测"></a>利用回归直线进行估计和预测</h3><ul>
+<li>点估计：利用估计的回归方程，对于x的某一个特定的值，求出y的一个估计值就是点估计</li>
+<li>区间估计：利用估计的回归方程，对于x的一个特定值，求出y的一个估计值的区间就是区间估计</li>
+</ul>
+<p><strong>估计标准误差的计算</strong></p>
+<p>为了度量回归方程的可靠性，通常计算估计标准误差。它度量观察值回绕着回归直线的变化程度或分散程度。</p>
+<p>估计平均误差：</p>
 <script type="math/tex; mode=display">
-
-* 公式中根号内的分母是n-2,而不是n,自由度是n-2
-* 估计标准误差越大，则数据点围绕回归直线的分散程度就越大，回归方程的代表性就越小
-* 估计标准误差越小，则数据点围绕回归直线的分散程度就越小，回归方程的代表就越大，其代表性就越高
-
-**置信区间估计：**</script><p>\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</p>
+S_{y}=\sqrt{\frac{\sum(y-\hat{y})^{2}}{n-2}}</script><ul>
+<li>公式中根号内的分母是n-2,而不是n,自由度是n-2</li>
+<li>估计标准误差越大，则数据点围绕回归直线的分散程度就越大，回归方程的代表性就越小</li>
+<li>估计标准误差越小，则数据点围绕回归直线的分散程度就越小，回归方程的代表就越大，其代表性就越高</li>
+</ul>
+<p><strong>置信区间估计：</strong></p>
 <script type="math/tex; mode=display">
-
-**在1- $\alpha$ 置信水平下预测区间**</script><p>\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{1+\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</p>
+\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</script><p><strong>在1- $\alpha$ 置信水平下预测区间</strong></p>
 <script type="math/tex; mode=display">
-
-
-### 回归直线的拟合优度
-回归直线与各观测点的接近程度称为回归直线对数据的拟合优度
-
-* 总平方和（SST）</script><p>\sum(y-\overline{y})^{2}</p>
-<script type="math/tex; mode=display">
-
-* 回归平方和（SSR）</script><p>\sum(\hat{y}-\overline{y})^{2}</p>
-<script type="math/tex; mode=display">
-
-* 残差平方和（SSE）</script><p>\Sigma(y-\hat{y})^{2}</p>
-<script type="math/tex; mode=display">
-
-总平方和可以分解为回归平方和、残差平方和两部分：SST=SSR+SSE
-
-* 总平方和（SST），反映因变量的n个观察值与其均值的总离差
-* 回归平方和（SSR），反映了y的总变差中，由于x与y之间的线性关系引起的y的部分变化
-* 残差平方和（SSE），反映了除了x和y的线性影响之外的其他因素对y变差的作用，是不能由回归直线来解释的y的变差部分
-
-## 判定系数
-回归平方和占总平方和的比例，用 $R^2$ 表示，其值在0到1之间
-
-* $R^2$ == 0：说明y的变化和x无关，x完全无助于解释y的变差
-* $R^2$ == 1: 说明残差平方和为0，拟合是完全的，y的变化只与x有关</script><p>R^{2}=\frac{S S R}{S S T}=\frac{\sum(\hat{y}-\overline{y})^{2}}{\sum(y-\overline{y})^{2}}=1-\frac{\sum(y-\hat{y})^{2}}{\sum(y-\overline{y})^{2}}</p>
-<script type="math/tex; mode=display">
-</script><p>\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}=\sum_{i=1}^{n}\left(\hat{y}_{i}-\overline{y}\right)^{2}+\sum_{i=1}^{n}\left(y_{i}-\hat{y}\right)^{2}</p>
-<script type="math/tex; mode=display">
-
-
-### 显著性检验
-显著性检验的主要目的是根据所建立的估计方程用自变量x来估计或预测因变量y的取值。当建立估计方程后，还不能马上进行估计或预测，因为该方程是根据样本数据得到的，它是否真实的反映了变量x和y之间的关系，则需要通过检验后才能证实。
-
-根据样本数据拟合回归方程时，实际上就已经假定变量x和y之间存在着线性关系，并假定误差项是一个服从正态分布的随机变量，且具有相同的方差。但这些假设是否成立需要检验
-
-显著性检验包括两方面：
-* 线性关系检验
-* 回归系数检验
-
-#### 线性关系检验
-线性关系检验是检验自变量x和因变量y之间线性关系是否显著，或者说，它们之间是否能用一个线性模型来表示。
-
-将均方回归（MSR）同均方残差（MSE）加以比较，应用F检验来分析二者之间的差别是否显著。
-
-* 均方回归：回归平方和SSR除以相应的自由度（自变量的个数K）
-* 均方残差：残差平方和SSE除以相应的自由度（n-k-1）
-
-H0: $\beta1=0$ 所有回归系数与零无显著差异，即y与x全体的线性关系不显著
-
-计算检验统计量F:</script><p>F=\frac{S S R / 1}{S S E / n-2}=\frac{M S R}{M S E} \sim F(1, n-2)</p>
-<script type="math/tex; mode=display">
-
-#### 回归系数的显著性检验
-回归系数显著性检验的目的是通过检验回归系数 $\beta$ 的值与0是否有显著性差异，来判断Y与X之间是否存在显著的线性关系。若 $\beta=0$ ，则总体回归方程中不含X项（即Y不随X的变动而变动），因此Y与X之间不存在线性关系；若 $\beta \neq 0$ ,说明变量Y与X之间存在显著的线性关系。
-
-## 多元线性回归
-经常会遇到某一现象的发展和变化取决于几个因素的影响，也就是一个因变量和几个自变量有依存关系的情况，这时需用多元线性回归分析。
-
-* 多元线性回归分析预测法，是指通过对两个或两个以上的自变量和一个因变量的相关分析，建立预测模型进行预测和控制的方法。
-* 多元线性回归预测模型一般是为：</script><p>y=A+B_{1} x_{1}+B_{2} x_{2}+B_{3} x_{3}+\ldots+B_{n} x_{n}+\varepsilon</p>
-<script type="math/tex; mode=display">
-
-**调整的多重判定系数：**
-用样本容量n和自变量的个数k去修正 $R^2$ 得到：</script><p>R_{a}^{2}=1-\left(1-R^{2}\right) \times \frac{n-1}{n-k-1}</p>
-<p>$$</p>
+\hat{y}_{0} \pm t_{\frac{\alpha}{2}} s_{e} \sqrt{1+\frac{1}{n}+\frac{\left(x_{0}-\overline{x}\right)^{2}}{\sum(x-\overline{x})^{2}}}</script><h3 id="回归直线的拟合优度"><a href="#回归直线的拟合优度" class="headerlink" title="回归直线的拟合优度"></a>回归直线的拟合优度</h3><p>回归直线与各观测点的接近程度称为回归直线对数据的拟合优度</p>
 <ul>
+<li>总平方和（SST）</li>
+</ul>
+<script type="math/tex; mode=display">
+\sum(y-\overline{y})^{2}</script><ul>
+<li>回归平方和（SSR）</li>
+</ul>
+<script type="math/tex; mode=display">
+\sum(\hat{y}-\overline{y})^{2}</script><ul>
+<li>残差平方和（SSE）</li>
+</ul>
+<script type="math/tex; mode=display">
+\Sigma(y-\hat{y})^{2}</script><p>总平方和可以分解为回归平方和、残差平方和两部分：SST=SSR+SSE</p>
+<ul>
+<li>总平方和（SST），反映因变量的n个观察值与其均值的总离差</li>
+<li>回归平方和（SSR），反映了y的总变差中，由于x与y之间的线性关系引起的y的部分变化</li>
+<li>残差平方和（SSE），反映了除了x和y的线性影响之外的其他因素对y变差的作用，是不能由回归直线来解释的y的变差部分</li>
+</ul>
+<h2 id="判定系数"><a href="#判定系数" class="headerlink" title="判定系数"></a>判定系数</h2><p>回归平方和占总平方和的比例，用 $R^2$ 表示，其值在0到1之间</p>
+<ul>
+<li>$R^2$ == 0：说明y的变化和x无关，x完全无助于解释y的变差</li>
+<li>$R^2$ == 1: 说明残差平方和为0，拟合是完全的，y的变化只与x有关</li>
+</ul>
+<script type="math/tex; mode=display">
+R^{2}=\frac{S S R}{S S T}=\frac{\sum(\hat{y}-\overline{y})^{2}}{\sum(y-\overline{y})^{2}}=1-\frac{\sum(y-\hat{y})^{2}}{\sum(y-\overline{y})^{2}}</script><script type="math/tex; mode=display">
+\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}=\sum_{i=1}^{n}\left(\hat{y}_{i}-\overline{y}\right)^{2}+\sum_{i=1}^{n}\left(y_{i}-\hat{y}\right)^{2}</script><h3 id="显著性检验"><a href="#显著性检验" class="headerlink" title="显著性检验"></a>显著性检验</h3><p>显著性检验的主要目的是根据所建立的估计方程用自变量x来估计或预测因变量y的取值。当建立估计方程后，还不能马上进行估计或预测，因为该方程是根据样本数据得到的，它是否真实的反映了变量x和y之间的关系，则需要通过检验后才能证实。</p>
+<p>根据样本数据拟合回归方程时，实际上就已经假定变量x和y之间存在着线性关系，并假定误差项是一个服从正态分布的随机变量，且具有相同的方差。但这些假设是否成立需要检验</p>
+<p>显著性检验包括两方面：</p>
+<ul>
+<li>线性关系检验</li>
+<li>回归系数检验</li>
+</ul>
+<h4 id="线性关系检验"><a href="#线性关系检验" class="headerlink" title="线性关系检验"></a>线性关系检验</h4><p>线性关系检验是检验自变量x和因变量y之间线性关系是否显著，或者说，它们之间是否能用一个线性模型来表示。</p>
+<p>将均方回归（MSR）同均方残差（MSE）加以比较，应用F检验来分析二者之间的差别是否显著。</p>
+<ul>
+<li>均方回归：回归平方和SSR除以相应的自由度（自变量的个数K）</li>
+<li>均方残差：残差平方和SSE除以相应的自由度（n-k-1）</li>
+</ul>
+<p>H0: $\beta1=0$ 所有回归系数与零无显著差异，即y与x全体的线性关系不显著</p>
+<p>计算检验统计量F:</p>
+<script type="math/tex; mode=display">
+F=\frac{S S R / 1}{S S E / n-2}=\frac{M S R}{M S E} \sim F(1, n-2)</script><h4 id="回归系数的显著性检验"><a href="#回归系数的显著性检验" class="headerlink" title="回归系数的显著性检验"></a>回归系数的显著性检验</h4><p>回归系数显著性检验的目的是通过检验回归系数 $\beta$ 的值与0是否有显著性差异，来判断Y与X之间是否存在显著的线性关系。若 $\beta=0$ ，则总体回归方程中不含X项（即Y不随X的变动而变动），因此Y与X之间不存在线性关系；若 $\beta \neq 0$ ,说明变量Y与X之间存在显著的线性关系。</p>
+<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><p>经常会遇到某一现象的发展和变化取决于几个因素的影响，也就是一个因变量和几个自变量有依存关系的情况，这时需用多元线性回归分析。</p>
+<ul>
+<li>多元线性回归分析预测法，是指通过对两个或两个以上的自变量和一个因变量的相关分析，建立预测模型进行预测和控制的方法。</li>
+<li>多元线性回归预测模型一般是为：</li>
+</ul>
+<script type="math/tex; mode=display">
+y=A+B_{1} x_{1}+B_{2} x_{2}+B_{3} x_{3}+\ldots+B_{n} x_{n}+\varepsilon</script><p><strong>调整的多重判定系数：</strong><br>用样本容量n和自变量的个数k去修正 $R^2$ 得到：</p>
+<script type="math/tex; mode=display">
+R_{a}^{2}=1-\left(1-R^{2}\right) \times \frac{n-1}{n-k-1}</script><ul>
 <li>避免增加自变量而高估 $R^2$</li>
 </ul>
 <h2 id="回归分析-statsmodels"><a href="#回归分析-statsmodels" class="headerlink" title="回归分析-statsmodels"></a>回归分析-statsmodels</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> statsmodels.api <span class="keyword">as</span> sm</span><br><span class="line"></span><br><span class="line">nsample = <span class="number">20</span></span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, nsample)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
@@ -859,7 +836,7 @@ H0: $\beta1=0$ 所有回归系数与零无显著差异，即y与x全体的线性
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回归分析"><span class="nav-number">1.</span> <span class="nav-text">回归分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析的一般步骤"><span class="nav-number">1.1.</span> <span class="nav-text">回归分析的一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一元线性回归"><span class="nav-number">1.2.</span> <span class="nav-text">一元线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归方程"><span class="nav-number">1.3.</span> <span class="nav-text">回归方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析-statsmodels"><span class="nav-number">1.4.</span> <span class="nav-text">回归分析-statsmodels</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#回归分析"><span class="nav-number">1.</span> <span class="nav-text">回归分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析的一般步骤"><span class="nav-number">1.1.</span> <span class="nav-text">回归分析的一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一元线性回归"><span class="nav-number">1.2.</span> <span class="nav-text">一元线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归方程"><span class="nav-number">1.3.</span> <span class="nav-text">回归方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数的最小二乘法估计"><span class="nav-number">1.4.</span> <span class="nav-text">参数的最小二乘法估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用回归直线进行估计和预测"><span class="nav-number">1.4.1.</span> <span class="nav-text">利用回归直线进行估计和预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归直线的拟合优度"><span class="nav-number">1.4.2.</span> <span class="nav-text">回归直线的拟合优度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判定系数"><span class="nav-number">1.5.</span> <span class="nav-text">判定系数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显著性检验"><span class="nav-number">1.5.1.</span> <span class="nav-text">显著性检验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线性关系检验"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">线性关系检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回归系数的显著性检验"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">回归系数的显著性检验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多元线性回归"><span class="nav-number">1.6.</span> <span class="nav-text">多元线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归分析-statsmodels"><span class="nav-number">1.7.</span> <span class="nav-text">回归分析-statsmodels</span></a></li></ol></li></ol></div>
             
 
           </div>
